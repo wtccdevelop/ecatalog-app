@@ -1,6 +1,5 @@
+import '../css/app.css';
 import { createApp } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import App from './App.vue';
 
-const app = createApp(HelloWorld);
-
-app.mount('#app');
+createApp(App).mount('#app');
