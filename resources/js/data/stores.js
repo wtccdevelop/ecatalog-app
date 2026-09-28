@@ -1,11 +1,11 @@
 const A = '/assets/WTC Cell - Official Storeee_files/';
 
 export const storeImages = [
-    { image_url: `${A}syihab-banjarbaru.jpg`,  text: 'WTC Cell Banjarbaru',   link: 'https://maps.app.goo.gl/hpPmBjJ2UVn6ZGxr6' },
-    { image_url: `${A}syihab-martapura.jpg`,   text: 'WTC Cell Martapura',    link: 'https://maps.app.goo.gl/1XD8fdaa2JcgpYyW8' },
-    { image_url: `${A}syihab-premium.jpg`,     text: 'Syihab Premium',        link: 'https://maps.app.goo.gl/wNRMLq97FsYKjGuj8' },
-    { image_url: `${A}syihab-sultan-adam.jpg`, text: 'WTC Cell Sultan Adam',  link: 'https://maps.app.goo.gl/QJScLZCcqs6LfPXx5' },
-    { image_url: `${A}syihab-veteran.jpg`,     text: 'WTC Cell Veteran',      link: 'https://maps.app.goo.gl/U9kREX3rPdqC6SFy8' },
+    { image_url: `${A}wtc.jpg`,  text: 'WTC Cell Jajag',   link: 'https://maps.app.goo.gl/fbkZp636M2WE1Pa37' },
+    // { image_url: `${A}syihab-martapura.jpg`,   text: 'WTC Cell Martapura',    link: 'https://maps.app.goo.gl/1XD8fdaa2JcgpYyW8' },
+    // { image_url: `${A}syihab-premium.jpg`,     text: 'Syihab Premium',        link: 'https://maps.app.goo.gl/wNRMLq97FsYKjGuj8' },
+    // { image_url: `${A}syihab-sultan-adam.jpg`, text: 'WTC Cell Sultan Adam',  link: 'https://maps.app.goo.gl/QJScLZCcqs6LfPXx5' },
+    // { image_url: `${A}syihab-veteran.jpg`,     text: 'WTC Cell Veteran',      link: 'https://maps.app.goo.gl/U9kREX3rPdqC6SFy8' },
 ];
 
 // dipakai section "Temukan Toko Kami"
@@ -26,10 +26,10 @@ export const storeLocations = storeAddresses.map((s, i) => ({
 
 export const instagramAccounts = [
     { handle: '@syihab_banjarbaru', label: 'Syihab Banjarbaru',              url: 'https://www.instagram.com/syihab_banjarbaru/' },
-    { handle: '@syihabpremium',     label: 'Syihab Premium Banjarbaru',      url: 'https://www.instagram.com/syihabpremium/' },
-    { handle: '@syihab_martapura',  label: 'Syihab Martapura',               url: 'https://www.instagram.com/syihab__martapura/' },
-    { handle: '@syihab_veteran',    label: 'Syihab Veteran Banjarmasin',     url: 'https://www.instagram.com/syihab_veteran/' },
-    { handle: '@syihab_sultanadam', label: 'Syihab Sultan Adam Banjarmasin', url: 'https://www.instagram.com/syihab_sultanadam/' },
+    // { handle: '@syihabpremium',     label: 'Syihab Premium Banjarbaru',      url: 'https://www.instagram.com/syihabpremium/' },
+    // { handle: '@syihab_martapura',  label: 'Syihab Martapura',               url: 'https://www.instagram.com/syihab__martapura/' },
+    // { handle: '@syihab_veteran',    label: 'Syihab Veteran Banjarmasin',     url: 'https://www.instagram.com/syihab_veteran/' },
+    // { handle: '@syihab_sultanadam', label: 'Syihab Sultan Adam Banjarmasin', url: 'https://www.instagram.com/syihab_sultanadam/' },
 ];
 
 export const socials = [

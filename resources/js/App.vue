@@ -13,7 +13,7 @@
 
             <div class="bg-gray-100 dark:bg-neutral-700">
                 <div class="lg:px-16 sm:px-6 max-w-[96rem] mx-auto">
-                    <AppGskBanner />
+                    <!-- <AppGskBanner /> -->
                     <AppProductList />
                     <AppBenefits />
                     <AppStoreSlider />

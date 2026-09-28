@@ -30,7 +30,7 @@
                     :key="i"
                     @click="goTo(i)"
                     class="size-2 md:size-3 border border-gray-400 rounded-full cursor-pointer transition-colors"
-                    :class="currentIndex === i ? 'bg-emerald-700 border-emerald-700' : ''"
+                    :class="currentIndex === i ? 'bg-blue-900 border-blue-700' : ''"
                     :aria-label="`Slide ${i + 1}`"
                 />
             </div>
