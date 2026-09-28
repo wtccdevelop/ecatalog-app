@@ -4,7 +4,8 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "concurrently \"php artisan serve\" \"vite\""
+        "dev": "concurrently \"php artisan serve\" \"vite\"",
+        "deploy": "pnpm build"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.3.3",
@@ -19,6 +20,7 @@
     },
     "dependencies": {
         "alpinejs": "^3.17.3",
-        "vue": "^3.5.43"
+        "vue": "^3.5.43",
+        "vue-router": "^4.6.4"
     }
 }

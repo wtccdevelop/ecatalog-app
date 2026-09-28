@@ -1,5 +1,5 @@
 <template>
-    <div class="py-10 px-4 sm:px-6 lg:px-16 bg-white dark:bg-neutral-800">
+    <div id="about" class="py-10 px-4 sm:px-6 lg:px-16 bg-white dark:bg-neutral-800">
         <div class="max-w-[96rem] mx-auto">
             <div class="mb-4">
                 <h2 class="text-lg font-extrabold tracking-widest dark:text-white">TENTANG KAMI</h2>
@@ -8,7 +8,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
                     <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                        <strong class="text-gray-900 dark:text-white">WTC Cell</strong> adalah toko gadget &amp; smartphone terpercaya di Kalimantan Selatan. Berkomitmen memberikan produk 100% original dengan harga terbaik dan pelayanan prima.
+                        <strong class="text-gray-900 dark:text-white">WTC Cell</strong> adalah toko gadget &amp; smartphone terpercaya di Banyuwangi. Berkomitmen memberikan produk 100% original dengan harga terbaik dan pelayanan prima.
                     </p>
                     <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                         Kami hadir dengan berbagai brand ternama: Apple, Samsung, Oppo, Vivo, Xiaomi, Realme, Infinix, dan Tecno. Tersedia pilihan pembelian tunai maupun kredit dengan cicilan ringan.

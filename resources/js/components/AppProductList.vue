@@ -22,10 +22,10 @@
 
             <!-- Product grid -->
             <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4">
-                <a
+                <RouterLink
                     v-for="product in visibleProducts(brand)"
                     :key="product.id"
-                    href="#"
+                    :to="`/product/${slugify(product.name)}`"
                     class="bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-neutral-800 dark:border-neutral-900 cursor-pointer hover:shadow-md transition-shadow"
                 >
                     <img
@@ -65,7 +65,8 @@
                             </span>
                         </div>
                     </div>
-                </a>
+               
+                </RouterLink>
             </div>
 
             <!-- Load more -->
@@ -85,6 +86,7 @@
 <script setup>
 import { reactive } from 'vue';
 import { productsByBrand } from '../data/products.js';
+import { slugify } from '../data/productDetails.js';
 
 const INITIAL_COUNT = 4;
 const LOAD_MORE_COUNT = 4;

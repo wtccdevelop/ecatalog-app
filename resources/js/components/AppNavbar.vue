@@ -4,14 +4,15 @@
             <!-- Logo + Search + Mobile icons -->
             <div class="flex items-center gap-2 w-full">
                 <!-- Logo -->
-                <a class="flex-none text-xl font-semibold dark:text-white focus:outline-hidden focus:opacity-80" href="/" aria-label="Brand">
+                <RouterLink class="flex-none text-xl font-semibold dark:text-white focus:outline-hidden focus:opacity-80" to="/" aria-label="Brand">
+
                     <span class="inline-flex items-center gap-x-2 text-xs sm:text-lg font-normal dark:text-white">
                         <span class="uppercase font-audiowide antialiased">
                             <span class="inline text-center">WTC</span>
                             <span class="block md:inline font-poppins uppercase font-normal antialiased text-center">Cell</span>
                         </span>
                     </span>
-                </a>
+                </RouterLink>
 
                 <!-- Search -->
                 <div class="flex w-full ml-2 sm:px-8 lg:px-0 lg:ml-16">
@@ -70,7 +71,13 @@
                     <a class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" href="/#product">Product</a>
                     <a class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" href="#">Events</a>
                     <a class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" href="#">Simulasi Kredit</a>
-                    <a class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" href="#">Tentang Kami</a>
+                    <RouterLink
+                        class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400"
+                        :to="{ path: '/', hash: '#about' }"
+                        @click="mobileOpen = false"
+                    >
+                        Tentang Kami
+                    </RouterLink>
 
                 </div>
             </div>
@@ -81,6 +88,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { productsByBrand } from '../data/products.js';
+import { slugify } from '../data/productDetails.js';
 
 const props = defineProps({
     isDark: { type: Boolean, default: false },
