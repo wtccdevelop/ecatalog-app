@@ -10,6 +10,7 @@
     </div>
 </template>
 
+
 <script setup>
 const img = '/assets/WTC Cell - Official Storeee_files/jasakirim.png';
 </script>
