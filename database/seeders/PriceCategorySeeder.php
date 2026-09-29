@@ -23,7 +23,6 @@ class PriceCategorySeeder extends Seeder
 
         foreach ($cats as $i => [$name, $min, $max]) {
             PriceCategories::updateOrCreate(
-                ['slug' => Str::slug($name)],
                 ['name' => $name, 'min_price' => $min, 'max_price' => $max, 'sort_order' => $i + 1]
             );
         }

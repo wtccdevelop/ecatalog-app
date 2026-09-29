@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('platform', 100);
             $table->string('label')->nullable();
             $table->string('url', 500);
-
+            $table->string('handle')->nullable();
             $table->boolean('is_active')->default(true);
             $table->unsignedSmallInteger('sort_order')->default(0);
 
