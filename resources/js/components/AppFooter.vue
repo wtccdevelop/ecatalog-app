@@ -33,8 +33,12 @@
                     class="size-8 inline-flex justify-center items-center rounded-full text-gray-500 hover:bg-gray-50 dark:hover:bg-neutral-700"
                 >
                     <svg class="shrink-0 size-3.5" fill="currentColor" :viewBox="s.viewBox"><path :d="s.path" /></svg>
+
                 </a>
             </div>
+            <p class="text-xs sm:text-m font-normal dark:text-white">
+                Kami mencatat statistik kunjungan secara anonim untuk meningkatkan layanan. Kami tidak memakai cookie dan tidak menyimpan alamat IP asli Anda.
+            </p>
         </div>
     </footer>
 </template>
