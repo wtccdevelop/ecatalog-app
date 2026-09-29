@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="catalog.home">
         <div class="bg-white dark:bg-neutral-700">
             <div class="max-w-[96rem] mx-auto">
                 <AppBanner />
@@ -27,9 +27,24 @@
             </div>
         </div>
     </div>
+
+    <div v-else class="min-h-[60vh] flex items-center justify-center text-sm dark:text-white">
+        <div v-if="catalog.homeError" class="text-center">
+            <p class="mb-3">Gagal memuat data.</p>
+            <button
+                type="button"
+                @click="retry"
+                class="px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700"
+            >
+                Coba lagi
+            </button>
+        </div>
+        <p v-else>Memuat...</p>
+    </div>
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import AppBanner from '../components/AppBanner.vue';
 import AppBrandGrid from '../components/AppBrandGrid.vue';
 import AppPriceCategory from '../components/AppPriceCategory.vue';
@@ -41,4 +56,13 @@ import AppPayments from '../components/AppPayments.vue';
 import AppSocial from '../components/AppSocial.vue';
 import AppShipping from '../components/AppShipping.vue';
 import AppLocations from '../components/AppLocations.vue';
+import { catalog, loadHome } from '../stores/catalog.js';
+
+function retry() {
+    loadHome(true).catch(() => {});
+}
+
+onMounted(() => {
+    loadHome().catch(() => {});
+});
 </script>

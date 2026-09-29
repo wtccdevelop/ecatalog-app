@@ -1,17 +1,24 @@
 <template>
     <div class="font-poppins" :class="{ dark: isDark }">
         <div class="bg-white dark:bg-neutral-800 min-h-screen">
-            <AppNavbar :is-dark="isDark" @toggle-dark="toggleDark" />
+            <AppNavbar v-if="showChrome" :is-dark="isDark" @toggle-dark="toggleDark" />
             <RouterView />
-            <AppFooter />
+            <AppFooter v-if="showChrome" />
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import AppNavbar from './components/AppNavbar.vue';
 import AppFooter from './components/AppFooter.vue';
+import { loadSite } from './stores/catalog.js';
+
+const route = useRoute();
+
+// navbar & footer disembunyikan di route dengan meta.hideChrome (login, admin)
+const showChrome = computed(() => !route.meta.hideChrome);
 
 const isDark = ref(false);
 
@@ -32,5 +39,7 @@ onMounted(() => {
         ? saved === 'dark'
         : window.matchMedia('(prefers-color-scheme: dark)').matches;
     applyTheme();
+
+    loadSite().catch(() => {});
 });
 </script>

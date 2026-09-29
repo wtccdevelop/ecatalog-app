@@ -8,8 +8,7 @@
                 <div
                     v-for="benefit in benefits"
                     :key="benefit.title"
-                    class="flex flex-col items-center text-center p-4 sm:p-6 rounded-xl shadow-sm"
-                    :class="benefit.color"
+                    class="flex flex-col items-center text-center p-4 sm:p-6 rounded-xl shadow-sm bg-gray-50 dark:bg-neutral-900"
                 >
                     <img :src="benefit.icon" :alt="benefit.title" class="w-10 h-10 sm:w-14 sm:h-14 object-contain mb-3" loading="lazy" />
                     <h3 class="text-xs sm:text-base font-bold text-gray-800 dark:text-white mb-1">{{ benefit.title }}</h3>
@@ -21,5 +20,8 @@
 </template>
 
 <script setup>
-import { benefits } from '../data/benefits.js';
+import { computed } from 'vue';
+import { catalog } from '../stores/catalog.js';
+
+const benefits = computed(() => catalog.home?.benefits ?? []);
 </script>

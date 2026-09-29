@@ -6,7 +6,7 @@
         <div class="lg:grid lg:grid-cols-8 sm:gap-x-6 sm:justify-items-center">
             <a
                 v-for="cat in priceCategories"
-                :key="cat.name"
+                :key="cat.id"
                 href="#"
                 class="inline-flex flex-col px-4 py-2 sm:px-6 sm:py-2 mr-3 sm:mr-0 items-center rounded-lg shadow-sm bg-blue-900 text-center cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-md text-white dark:text-gray-200 dark:bg-neutral-800"
             >
@@ -17,5 +17,8 @@
 </template>
 
 <script setup>
-import { priceCategories } from '../data/brands.js';
+import { computed } from 'vue';
+import { catalog } from '../stores/catalog.js';
+
+const priceCategories = computed(() => catalog.home?.price_categories ?? []);
 </script>

@@ -25,9 +25,5 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
         ]);
 
-        User::updateOrCreate(
-            ['email' => 'admin@wtccell.test'],
-            ['name' => 'Admin', 'password' => Hash::make('root')]
-        );
     }
 }
