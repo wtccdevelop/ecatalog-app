@@ -1,4 +1,4 @@
-const A = '/assets/WTC Cell - Official Storeee_files/';
+const A = '/assets/images/';
 
 export const benefits = [
     { title: 'Product 100% Original', description: 'Garansi resmi',              icon: `${A}ceklis.webp`, color: 'bg-gray-50 dark:bg-neutral-900' },

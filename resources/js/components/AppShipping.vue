@@ -12,5 +12,5 @@
 
 
 <script setup>
-const img = '/assets/WTC Cell - Official Storeee_files/jasakirim.png';
+const img = '/assets/images/jasakirim.png';
 </script>

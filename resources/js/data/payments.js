@@ -1,4 +1,4 @@
-const A = '/assets/WTC Cell - Official Storeee_files/';
+const A = '/assets/images/';
 
 const list = [
     ['bca', 'Bank BCA'], ['bankbjb', 'Bank BJB'], ['bni', 'Bank BNI'], ['bri', 'Bank BRI'],

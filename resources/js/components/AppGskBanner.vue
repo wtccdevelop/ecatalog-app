@@ -29,5 +29,5 @@
 </template>
 
 <script setup>
-const gskImage = '/assets/WTC Cell - Official Storeee_files/bekas-gsk.jpg';
+const gskImage = '/assets/images/bekas-gsk.jpg';
 </script>

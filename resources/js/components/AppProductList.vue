@@ -48,7 +48,7 @@
                                 <div class="items-center w-full flex gap-2">
                                     <span class="font-semibold">{{ product.cicilan }}</span>
                                     <div class="w-10 flex items-center h-5">
-                                        <!-- <img class="object-cover" src="/assets/WTC Cell - Official Storeee_files/krdvlogo.webp" alt="Kredivo" loading="lazy" /> -->
+                                        <!-- <img class="object-cover" src="/assets/images/krdvlogo.webp" alt="Kredivo" loading="lazy" /> -->
                                     </div>
                                 </div>
                             </li>
