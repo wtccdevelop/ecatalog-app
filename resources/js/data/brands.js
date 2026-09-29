@@ -1,4 +1,4 @@
-const ASSETS = '/assets/WTC Cell - Official Storeee_files/';
+const ASSETS = '/assets/images/';
 
 export const brands = [
     { name: 'samsung',  src: `${ASSETS}2.png` },

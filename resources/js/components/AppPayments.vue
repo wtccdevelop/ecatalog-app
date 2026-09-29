@@ -7,14 +7,14 @@
             </div>
             <div class="grid grid-cols-4 md:grid-cols-6 gap-2">
                 <div
-                    v-for="method in paymentMethods"
-                    :key="method.alt"
+                    v-for="method in payments"
+                    :key="method.name"
                     class="bg-white px-2 py-1 overflow-hidden rounded-lg flex items-center justify-center"
                 >
                     <img
                         class="w-full size-10 object-contain rounded-md"
-                        :src="method.src"
-                        :alt="method.alt"
+                        :src="method.logo"
+                        :alt="method.name"
                         loading="lazy"
                     />
                 </div>
@@ -24,5 +24,8 @@
 </template>
 
 <script setup>
-import { paymentMethods } from '../data/payments.js';
+import { computed } from 'vue';
+import { catalog } from '../stores/catalog.js';
+
+const payments = computed(() => catalog.home?.payments ?? []);
 </script>

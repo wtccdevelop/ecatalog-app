@@ -1,4 +1,4 @@
-const A = '/assets/WTC Cell - Official Storeee_files/';
+const A = '/assets/images/';
 
 export const storeImages = [
     { image_url: `${A}wtc.jpg`,  text: 'WTC Cell Jajag',   link: 'https://maps.app.goo.gl/fbkZp636M2WE1Pa37' },

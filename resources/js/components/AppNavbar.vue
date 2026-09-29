@@ -1,11 +1,9 @@
 <template>
     <header class="sticky z-50 top-0 drop-shadow-md flex flex-wrap lg:justify-start lg:flex-nowrap w-full bg-white text-sm py-3 dark:bg-neutral-800">
         <nav class="max-w-[85rem] w-full mx-auto px-4 lg:flex lg:items-center lg:justify-between">
-            <!-- Logo + Search + Mobile icons -->
             <div class="flex items-center gap-2 w-full">
                 <!-- Logo -->
                 <RouterLink class="flex-none text-xl font-semibold dark:text-white focus:outline-hidden focus:opacity-80" to="/" aria-label="Brand">
-
                     <span class="inline-flex items-center gap-x-2 text-xs sm:text-lg font-normal dark:text-white">
                         <span class="uppercase font-audiowide antialiased">
                             <span class="inline text-center">WTC</span>
@@ -23,28 +21,27 @@
                             class="py-2.5 sm:py-3 px-5 dark:text-white block w-full border border-gray-200 rounded-full sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-600"
                             placeholder="Cari produk atau brand..."
                         />
-                        <!-- Search results dropdown -->
                         <div
-                            v-if="searchQuery.length > 1 && searchResults.length > 0"
+                            v-if="searchResults.length > 0"
                             class="absolute top-full mt-1 left-0 w-full bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-xl shadow-lg z-50 max-h-64 overflow-y-auto"
                         >
-                            <a
+                            <RouterLink
                                 v-for="result in searchResults"
                                 :key="result.id"
-                                href="#"
+                                :to="`/product/${result.slug}`"
+                                @click="clearSearch"
                                 class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 dark:hover:bg-neutral-700"
                             >
                                 <img :src="result.image" :alt="result.name" class="w-10 h-10 object-contain rounded" />
                                 <div>
                                     <p class="text-xs font-semibold text-gray-800 dark:text-white">{{ result.name }}</p>
-                                    <p class="text-xs text-green-600">{{ result.price }}</p>
+                                    <p class="text-xs text-green-600">{{ formatRupiah(result.price) }}</p>
                                 </div>
-                            </a>
+                            </RouterLink>
                         </div>
                     </div>
                 </div>
 
-               
                 <!-- Mobile hamburger -->
                 <div class="lg:hidden flex gap-3">
                     <button
@@ -66,8 +63,6 @@
             <!-- Desktop nav + Mobile dropdown -->
             <div :class="['overflow-hidden transition-all duration-300 basis-full grow lg:block', mobileOpen ? 'block' : 'hidden']">
                 <div class="flex flex-col gap-5 mt-5 lg:flex-row lg:items-center lg:justify-end lg:mt-0 lg:ps-5">
-
-                    <!-- Nav links -->
                     <a class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" href="/#product">Product</a>
                     <a class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" href="#">Events</a>
                     <a class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" href="#">Simulasi Kredit</a>
@@ -78,7 +73,6 @@
                     >
                         Tentang Kami
                     </RouterLink>
-
                 </div>
             </div>
         </nav>
@@ -86,40 +80,52 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { productsByBrand } from '../data/products.js';
-import { slugify } from '../data/productDetails.js';
+import { ref, watch, onUnmounted } from 'vue';
+import { api } from '../lib/api.js';
+import { formatRupiah } from '../lib/format.js';
 
-const props = defineProps({
+defineProps({
     isDark: { type: Boolean, default: false },
 });
-const emit = defineEmits(['toggle-dark']);
+defineEmits(['toggle-dark']);
 
-const mobileOpen  = ref(false);
-const profileOpen = ref(false);
+const mobileOpen = ref(false);
 const searchQuery = ref('');
-const profileDropdown = ref(null);
+const searchResults = ref([]);
 
-// Flatten all products for search
-const allProducts = Object.values(productsByBrand).flat();
+let timer = null;
+let controller = null;
 
-const searchResults = computed(() => {
-    if (searchQuery.value.length < 2) return [];
-    const q = searchQuery.value.toLowerCase();
-    return allProducts.filter(p => p.name.toLowerCase().includes(q)).slice(0, 8);
+function clearSearch() {
+    searchQuery.value = '';
+    searchResults.value = [];
+    mobileOpen.value = false;
+}
+
+watch(searchQuery, (value) => {
+    clearTimeout(timer);
+    controller?.abort();
+
+    const q = value.trim();
+    if (q.length < 2) {
+        searchResults.value = [];
+        return;
+    }
+
+    timer = setTimeout(async () => {
+        controller = new AbortController();
+        try {
+            searchResults.value = await api(`/products/search?q=${encodeURIComponent(q)}`, {
+                signal: controller.signal,
+            });
+        } catch (e) {
+            if (e.name !== 'AbortError') searchResults.value = [];
+        }
+    }, 300);
 });
 
-function toggleDark() {
-    emit('toggle-dark');
-}
-
-// Close profile dropdown when clicking outside
-function handleOutsideClick(e) {
-    if (profileDropdown.value && !profileDropdown.value.contains(e.target)) {
-        profileOpen.value = false;
-    }
-}
-
-onMounted(() => document.addEventListener('click', handleOutsideClick));
-onUnmounted(() => document.removeEventListener('click', handleOutsideClick));
+onUnmounted(() => {
+    clearTimeout(timer);
+    controller?.abort();
+});
 </script>

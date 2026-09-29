@@ -25,21 +25,32 @@
             <div class="mt-3 space-x-2">
                 <a
                     v-for="s in socials"
-                    :key="s.name"
+                    :key="s.url"
                     :href="s.url"
                     target="_blank"
                     rel="noopener noreferrer"
-                    :aria-label="s.name"
+                    :aria-label="s.label || s.platform"
                     class="size-8 inline-flex justify-center items-center rounded-full text-gray-500 hover:bg-gray-50 dark:hover:bg-neutral-700"
                 >
-                    <svg class="shrink-0 size-3.5" fill="currentColor" :viewBox="s.viewBox"><path :d="s.path" /></svg>
+                    <svg class="shrink-0 size-3.5" fill="currentColor" :viewBox="socialIcons[s.platform].viewBox">
+                        <path :d="socialIcons[s.platform].path" />
+                    </svg>
                 </a>
             </div>
+            <p class="text-xs sm:text-m font-normal dark:text-white">
+                Kami mencatat statistik kunjungan secara anonim untuk meningkatkan layanan. Kami tidak memakai cookie dan tidak menyimpan alamat IP asli Anda.
+            </p>
         </div>
     </footer>
 </template>
 
 <script setup>
-import { socials } from '../data/stores.js';
+import { computed } from 'vue';
+import { catalog } from '../stores/catalog.js';
+import { socialIcons } from '../data/socialIcons.js';
+
 const year = new Date().getFullYear();
+
+// hanya platform yang punya ikon
+const socials = computed(() => (catalog.site?.socials ?? []).filter((s) => socialIcons[s.platform]));
 </script>

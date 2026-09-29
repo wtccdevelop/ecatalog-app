@@ -1,6 +1,6 @@
 import { productsByBrand } from './products.js';
 
-const A = '/assets/WTC Cell - Official Storeee_files/';
+const A = '/assets/images/';
 
 // GANTI dengan nomor WhatsApp toko yang asli
 export const WA_NUMBER = '6281234567890';
