@@ -1,6 +1,6 @@
 {
     "agents": [
-        "kiro"
+        "claude_code"
     ],
     "mcp": true,
     "nightwatch": false,
