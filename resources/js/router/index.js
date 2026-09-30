@@ -6,6 +6,8 @@ import AdminLayout from '../pages/admin/AdminLayout.vue';
 import DashboardPage from '../pages/admin/DashboardPage.vue';
 import BrandsPage from '../pages/admin/BrandsPage.vue';
 import { auth, fetchUser } from '../stores/auth.js';
+import ProductsPage from '../pages/admin/ProductsPage.vue';
+import ProductFormPage from '../pages/admin/ProductFormPage.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -23,6 +25,9 @@ const router = createRouter({
                 // Tahap berikutnya ditambah di sini
             ],
         },
+        { path: 'products', name: 'admin.products', component: ProductsPage, meta: { title: 'Produk' } },
+        { path: 'products/create', name: 'admin.products.create', component: ProductFormPage, meta: { title: 'Tambah Produk' } },
+        { path: 'products/:id/edit', name: 'admin.products.edit', component: ProductFormPage, meta: { title: 'Edit Produk' } },
         { path: '/:pathMatch(.*)*', redirect: '/' },
     ],
     scrollBehavior(to, from, saved) {

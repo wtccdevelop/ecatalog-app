@@ -105,7 +105,7 @@ const I = {
 const menu = [
     { label: 'Dashboard',        to: '/admin',                 icon: I.home,  exact: true },
     { label: 'Brand',            to: '/admin/brands',          icon: I.tag },
-    { label: 'Produk',           to: '/admin/products',        icon: I.phone, soon: true },
+    { label: 'Produk',           to: '/admin/products',        icon: I.phone},
     { label: 'Banner',           to: '/admin/banners',         icon: I.photo, soon: true },
     { label: 'Toko',             to: '/admin/stores',          icon: I.list,  soon: true },
     { label: 'Benefit',          to: '/admin/benefits',        icon: I.list,  soon: true },
