@@ -8,6 +8,7 @@ import BrandsPage from '../pages/admin/BrandsPage.vue';
 import { auth, fetchUser } from '../stores/auth.js';
 import ProductsPage from '../pages/admin/ProductsPage.vue';
 import ProductFormPage from '../pages/admin/ProductFormPage.vue';
+import BannersPage from '../pages/admin/BannersPage.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -25,6 +26,7 @@ const router = createRouter({
                 { path: 'products', name: 'admin.products', component: ProductsPage, meta: { title: 'Produk' } },
                 { path: 'products/create', name: 'admin.products.create', component: ProductFormPage, meta: { title: 'Tambah Produk' } },
                 { path: 'products/:id/edit', name: 'admin.products.edit', component: ProductFormPage, meta: { title: 'Edit Produk' } },
+                { path: 'banners', name: 'admin.banners', component: BannersPage, meta: { title: 'Banner' } },
             ],
         },
         { path: '/:pathMatch(.*)*', redirect: '/' },

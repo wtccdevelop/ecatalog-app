@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Admin\DashboardController as AdminDashboardControll
 use App\Http\Controllers\Api\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Api\Admin\ProductImageController as AdminProductImageController;
 use App\Http\Controllers\Api\Admin\ReviewController as AdminReviewController;
+use App\Http\Controllers\Api\Admin\BannerController as AdminBannerController;
 
 Route::prefix('api/auth')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
@@ -30,7 +31,9 @@ Route::prefix('api/admin')->middleware('auth')->group(function () {
     Route::patch('reviews/{review}', [AdminReviewController::class, 'toggle']);
     Route::delete('reviews/{review}', [AdminReviewController::class, 'destroy']);
 
-    // Tahap berikutnya ditambah di sini
+    // Banner
+    Route::patch('banners/{banner}/toggle', [AdminBannerController::class, 'toggle']);
+    Route::apiResource('banners', AdminBannerController::class)->except('show');
 });
 
 Route::view('/{any?}', 'welcome')->where('any', '.*');
