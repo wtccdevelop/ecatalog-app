@@ -99,6 +99,7 @@ const I = {
     phone:   'M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3',
     photo:   'm2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5a1.5 1.5 0 0 0 1.5-1.5V4.5a1.5 1.5 0 0 0-1.5-1.5H3.75a1.5 1.5 0 0 0-1.5 1.5v15a1.5 1.5 0 0 0 1.5 1.5Z',
     list:    'M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5',
+    chart:   'M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z',
 };
 
 // soon: true = belum dibuat (jadi false tiap tahap selesai)
@@ -107,13 +108,13 @@ const menu = [
     { label: 'Brand',            to: '/admin/brands',          icon: I.tag },
     { label: 'Produk',           to: '/admin/products',        icon: I.phone},
     { label: 'Banner',           to: '/admin/banners',         icon: I.photo},
-    { label: 'Toko',             to: '/admin/stores',          icon: I.list,  soon: true },
+    { label: 'Toko',             to: '/admin/stores',          icon: I.list},
     { label: 'Benefit',          to: '/admin/benefits',        icon: I.list,  soon: true },
     { label: 'Metode Pembayaran',to: '/admin/payments',        icon: I.list,  soon: true },
     { label: 'Kategori Harga',   to: '/admin/price-categories',icon: I.list,  soon: true },
     { label: 'Sosial Media',     to: '/admin/socials',         icon: I.list,  soon: true },
     { label: 'Pengaturan',       to: '/admin/settings',        icon: I.list,  soon: true },
-    { label: 'Statistik',        to: '/admin/statistics',      icon: I.list,  soon: true },
+    { label: 'Statistik',        to: '/admin/statistics',      icon: I.chart},
 ];
 
 watch(() => route.path, () => { open.value = false; });

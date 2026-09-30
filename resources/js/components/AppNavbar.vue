@@ -83,6 +83,9 @@
 import { ref, watch, onUnmounted } from 'vue';
 import { api } from '../lib/api.js';
 import { formatRupiah } from '../lib/format.js';
+import { track } from '../lib/track.js';
+
+let trackTimer = null;
 
 defineProps({
     isDark: { type: Boolean, default: false },
@@ -104,6 +107,7 @@ function clearSearch() {
 
 watch(searchQuery, (value) => {
     clearTimeout(timer);
+    clearTimeout(trackTimer);
     controller?.abort();
 
     const q = value.trim();
@@ -111,6 +115,9 @@ watch(searchQuery, (value) => {
         searchResults.value = [];
         return;
     }
+
+    // catat kata kunci hanya setelah pengguna berhenti mengetik
+    trackTimer = setTimeout(() => track('search', { keyword: q }), 1000);
 
     timer = setTimeout(async () => {
         controller = new AbortController();

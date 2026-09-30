@@ -9,6 +9,9 @@ import { auth, fetchUser } from '../stores/auth.js';
 import ProductsPage from '../pages/admin/ProductsPage.vue';
 import ProductFormPage from '../pages/admin/ProductFormPage.vue';
 import BannersPage from '../pages/admin/BannersPage.vue';
+import StoresPage from '../pages/admin/StoresPage.vue';
+import { track } from '../lib/track.js';
+import StatisticsPage from '../pages/admin/StatisticsPage.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -27,6 +30,8 @@ const router = createRouter({
                 { path: 'products/create', name: 'admin.products.create', component: ProductFormPage, meta: { title: 'Tambah Produk' } },
                 { path: 'products/:id/edit', name: 'admin.products.edit', component: ProductFormPage, meta: { title: 'Edit Produk' } },
                 { path: 'banners', name: 'admin.banners', component: BannersPage, meta: { title: 'Banner' } },
+                { path: 'stores', name: 'admin.stores', component: StoresPage, meta: { title: 'Toko' } },
+                { path: 'statistics', name: 'admin.statistics', component: StatisticsPage, meta: { title: 'Statistik' } },
             ],
         },
         { path: '/:pathMatch(.*)*', redirect: '/' },
@@ -58,6 +63,13 @@ router.beforeEach(async (to) => {
     }
 
     return true;
+});
+
+// catat page view (lewati admin/login & perubahan hash/query saja)
+router.afterEach((to, from) => {
+    if (to.meta.hideChrome) return;
+    if (from.matched.length && to.path === from.path) return;
+    track('pageview', { path: to.path });
 });
 
 export default router;
