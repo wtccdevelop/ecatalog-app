@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
 import ProductDetail from '../pages/ProductDetail.vue';
 import LoginPage from '../pages/LoginPage.vue';
-import AdminPage from '../pages/AdminPage.vue';
+import AdminLayout from '../pages/admin/AdminLayout.vue';
+import DashboardPage from '../pages/admin/DashboardPage.vue';
+import BrandsPage from '../pages/admin/BrandsPage.vue';
 import { auth, fetchUser } from '../stores/auth.js';
 
 const router = createRouter({
@@ -11,7 +13,16 @@ const router = createRouter({
         { path: '/', name: 'home', component: HomePage },
         { path: '/product/:slug', name: 'product', component: ProductDetail },
         { path: '/login', name: 'login', component: LoginPage, meta: { guestOnly: true, hideChrome: true } },
-        { path: '/admin', name: 'admin', component: AdminPage, meta: { requiresAuth: true, hideChrome: true } },
+        {
+            path: '/admin',
+            component: AdminLayout,
+            meta: { requiresAuth: true, hideChrome: true },
+            children: [
+                { path: '', name: 'admin', component: DashboardPage, meta: { title: 'Dashboard' } },
+                { path: 'brands', name: 'admin.brands', component: BrandsPage, meta: { title: 'Brand' } },
+                // Tahap berikutnya ditambah di sini
+            ],
+        },
         { path: '/:pathMatch(.*)*', redirect: '/' },
     ],
     scrollBehavior(to, from, saved) {
@@ -19,7 +30,7 @@ const router = createRouter({
 
         if (to.hash) {
             const header = document.querySelector('header');
-            const offset = (header?.offsetHeight ?? 80) + 16; // tinggi navbar + jarak 16px
+            const offset = (header?.offsetHeight ?? 80) + 16;
             return { el: to.hash, top: offset, behavior: 'smooth' };
         }
 
