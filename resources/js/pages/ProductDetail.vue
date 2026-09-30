@@ -99,7 +99,7 @@
                                         <span class="text-sm font-semibold">{{ formatRupiah(lowestInstallment.monthly) }}/bln</span>
                                         <button
                                             type="button"
-                                            @click="showInstallment = true"
+                                            @click="openInstallment"
                                             class="text-sm text-blue-600 ml-2 hover:text-blue-500 font-medium mt-2"
                                         >
                                             Lihat Selengkapnya
@@ -127,6 +127,7 @@
                                 <div class="mt-8">
                                     <a
                                         :href="waLink"
+                                        @click="track('wa_click')"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         class="inline-flex items-center justify-center w-full px-4 md:px-6 md:py-3.5 py-2.5 border border-transparent font-bold text-sm md:text-base rounded-xl shadow-lg text-white bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 active:scale-98 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300 ease-in-out gap-2.5 group"
@@ -249,6 +250,12 @@ import { useRoute } from 'vue-router';
 import { api } from '../lib/api.js';
 import { buildInstallments, formatRupiah } from '../lib/format.js';
 import { catalog } from '../stores/catalog.js';
+import { track } from '../lib/track.js';
+
+function openInstallment() {
+    showInstallment.value = true;
+    track('installment_view');
+}
 
 const route = useRoute();
 
