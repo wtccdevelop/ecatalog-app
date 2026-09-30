@@ -5,14 +5,15 @@ function xsrfToken() {
 
 export async function api(path, { method = 'GET', body, signal } = {}) {
     const headers = { Accept: 'application/json' };
+    const isForm = body instanceof FormData;
 
-    if (body !== undefined) headers['Content-Type'] = 'application/json';
+    if (body !== undefined && !isForm) headers['Content-Type'] = 'application/json';
     if (method !== 'GET') headers['X-XSRF-TOKEN'] = xsrfToken();
 
     const res = await fetch(`/api${path}`, {
         method,
         headers,
-        body: body !== undefined ? JSON.stringify(body) : undefined,
+        body: body === undefined ? undefined : isForm ? body : JSON.stringify(body),
         credentials: 'same-origin',
         signal,
     });
