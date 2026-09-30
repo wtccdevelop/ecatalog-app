@@ -22,12 +22,11 @@ const router = createRouter({
             children: [
                 { path: '', name: 'admin', component: DashboardPage, meta: { title: 'Dashboard' } },
                 { path: 'brands', name: 'admin.brands', component: BrandsPage, meta: { title: 'Brand' } },
-                // Tahap berikutnya ditambah di sini
+                { path: 'products', name: 'admin.products', component: ProductsPage, meta: { title: 'Produk' } },
+                { path: 'products/create', name: 'admin.products.create', component: ProductFormPage, meta: { title: 'Tambah Produk' } },
+                { path: 'products/:id/edit', name: 'admin.products.edit', component: ProductFormPage, meta: { title: 'Edit Produk' } },
             ],
         },
-        { path: 'products', name: 'admin.products', component: ProductsPage, meta: { title: 'Produk' } },
-        { path: 'products/create', name: 'admin.products.create', component: ProductFormPage, meta: { title: 'Tambah Produk' } },
-        { path: 'products/:id/edit', name: 'admin.products.edit', component: ProductFormPage, meta: { title: 'Edit Produk' } },
         { path: '/:pathMatch(.*)*', redirect: '/' },
     ],
     scrollBehavior(to, from, saved) {

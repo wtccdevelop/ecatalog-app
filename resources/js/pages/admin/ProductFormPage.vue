@@ -352,10 +352,18 @@ async function submit() {
             body: fd,
         });
 
-        toast.success(id.value ? 'Produk diperbarui.' : 'Produk ditambahkan. Silakan tambah galeri.');
+        //redirect ke halaman edit product setelah sukses menambahkan product
+        if (id.value) {
+            fill(res);
+            toast.success('Produk berhasil diperbarui.');
+        } else {
+            await router.replace({
+                name: 'admin.products.edit',
+                params: { id: res.id },
+            });
 
-        if (id.value) fill(res);
-        else router.replace(`/admin/products/${res.id}/edit`);
+            toast.success('Produk berhasil dibuat.');
+        }
     } catch (e) {
         if (expired(e)) return;
         if (e.status === 422) {
