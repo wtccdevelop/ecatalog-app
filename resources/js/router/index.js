@@ -6,7 +6,7 @@ import AdminLayout from '../pages/admin/AdminLayout.vue';
 import DashboardPage from '../pages/admin/DashboardPage.vue';
 import BrandsPage from '../pages/admin/BrandsPage.vue';
 import { auth, fetchUser } from '../stores/auth.js';
-import ProductsPage from '../pages/admin/ProductsPage.vue';
+import AdminProductsPage from '../pages/admin/ProductsPage.vue';
 import ProductFormPage from '../pages/admin/ProductFormPage.vue';
 import BannersPage from '../pages/admin/BannersPage.vue';
 import StoresPage from '../pages/admin/StoresPage.vue';
@@ -31,7 +31,7 @@ const router = createRouter({
             children: [
                 { path: '', name: 'admin', component: DashboardPage, meta: { title: 'Dashboard' } },
                 { path: 'brands', name: 'admin.brands', component: BrandsPage, meta: { title: 'Brand' } },
-                { path: 'products', name: 'admin.products', component: ProductsPage, meta: { title: 'Produk' } },
+                { path: 'products', name: 'admin.products', component: AdminProductsPage, meta: { title: 'Produk' } },
                 { path: 'products/create', name: 'admin.products.create', component: ProductFormPage, meta: { title: 'Tambah Produk' } },
                 { path: 'products/:id/edit', name: 'admin.products.edit', component: ProductFormPage, meta: { title: 'Edit Produk' } },
                 { path: 'banners', name: 'admin.banners', component: BannersPage, meta: { title: 'Banner' } },

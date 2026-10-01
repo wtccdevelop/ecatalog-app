@@ -43,7 +43,7 @@
             @click="$emit('reset')"
             class="w-full py-2 rounded-xl text-xs font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 dark:bg-neutral-700 dark:text-blue-300 dark:hover:bg-neutral-600 transition-colors"
         >
-            Hapus semua filter
+            Reset
         </button>
     </div>
 </template>

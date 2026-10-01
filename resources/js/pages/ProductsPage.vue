@@ -115,7 +115,7 @@
                             @click="resetAll"
                             class="mt-4 px-4 py-2 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold hover:bg-blue-100 dark:bg-neutral-700 dark:text-blue-300"
                         >
-                            Hapus semua filter
+                            Reset
                         </button>
                     </div>
 
