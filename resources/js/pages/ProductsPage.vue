@@ -125,8 +125,9 @@
                             v-for="p in products"
                             :key="p.id"
                             :to="`/product/${p.slug}`"
-                            class="group bg-white dark:bg-neutral-800 rounded-2xl ring-1 ring-black/5 dark:ring-white/5 shadow-sm overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
+                            class="group bg-white dark:bg-neutral-800 rounded-2xl ring-1 ring-black/5 dark:ring-white/5 shadow-sm overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300 relative"
                         >
+                            <EventDecoration />
                             <div class="bg-gray-50 dark:bg-neutral-700/60 p-3">
                                 <img
                                     :src="p.image"
@@ -205,6 +206,7 @@ import { api } from '../lib/api.js';
 import { formatRupiah, monthly24 } from '../lib/format.js';
 import { catalog, loadHome } from '../stores/catalog.js';
 import ProductFilters from '../components/ProductFilters.vue';
+import EventDecoration from '../components/EventDecoration.vue';
 
 const tag = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-neutral-800 dark:text-blue-300 ring-1 ring-blue-100 dark:ring-neutral-600 font-semibold hover:bg-blue-100 transition-colors';
 const pageBtn = (active) => [
