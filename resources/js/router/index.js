@@ -12,6 +12,7 @@ import BannersPage from '../pages/admin/BannersPage.vue';
 import StoresPage from '../pages/admin/StoresPage.vue';
 import { track } from '../lib/track.js';
 import StatisticsPage from '../pages/admin/StatisticsPage.vue';
+import BenefitsPage from '../pages/admin/BenefitsPage.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -32,6 +33,7 @@ const router = createRouter({
                 { path: 'banners', name: 'admin.banners', component: BannersPage, meta: { title: 'Banner' } },
                 { path: 'stores', name: 'admin.stores', component: StoresPage, meta: { title: 'Toko' } },
                 { path: 'statistics', name: 'admin.statistics', component: StatisticsPage, meta: { title: 'Statistik' } },
+                { path: 'benefits', name: 'admin.benefits', component: BenefitsPage, meta: { title: 'Benefit' } },
             ],
         },
         { path: '/:pathMatch(.*)*', redirect: '/' },

@@ -3,14 +3,15 @@
         <div class="w-full py-10 px-4 sm:px-6 lg:px-8 mx-auto max-w-[96rem] text-center">
             <a class="text-xl font-semibold dark:text-white" href="/" aria-label="Brand">
                 <span class="inline-flex items-center gap-x-2 text-xs sm:text-lg font-normal dark:text-white">
-                    <span class="uppercase font-audiowide antialiased">
-                        <span class="inline text-center">WTC</span>
-                        <span class="block md:inline font-poppins uppercase font-normal antialiased text-center">CELL</span>
-                    </span>
+                    <img
+                        :src="'/assets/images/redesain_logo.jpg'"
+                        alt="WTC Cell"
+                        class="h-10 object-contain"
+                    >
                 </span>
             </a>
 
-            <div class="mt-3">
+            <div class="mt-1">
                 <p class="text-gray-500 text-xs sm:text-sm font-semibold">#ceksekalipastibeli</p>
                 <p class="text-gray-500 text-xs sm:text-sm">
                     © {{ year }} <span class="font-semibold">WTC Cell.</span> All right reserved
@@ -38,7 +39,7 @@
                 </a>
             </div>
             <p class="text-xs sm:text-m font-normal dark:text-white">
-                Kami mencatat statistik kunjungan secara anonim untuk meningkatkan layanan. Kami tidak memakai cookie dan tidak menyimpan alamat IP asli Anda.
+                <!-- Kami mencatat statistik kunjungan secara anonim untuk meningkatkan layanan. Kami tidak memakai cookie dan tidak menyimpan alamat IP asli Anda. -->
             </p>
         </div>
     </footer>

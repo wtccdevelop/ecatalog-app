@@ -3,13 +3,16 @@
         <nav class="max-w-[85rem] w-full mx-auto px-4 lg:flex lg:items-center lg:justify-between">
             <div class="flex items-center gap-2 w-full">
                 <!-- Logo -->
-                <RouterLink class="flex-none text-xl font-semibold dark:text-white focus:outline-hidden focus:opacity-80" to="/" aria-label="Brand">
-                    <span class="inline-flex items-center gap-x-2 text-xs sm:text-lg font-normal dark:text-white">
-                        <span class="uppercase font-audiowide antialiased">
-                            <span class="inline text-center">WTC</span>
-                            <span class="block md:inline font-poppins uppercase font-normal antialiased text-center">Cell</span>
-                        </span>
-                    </span>
+                <RouterLink
+                    class="flex-none text-xl font-semibold dark:text-white focus:outline-hidden focus:opacity-80"
+                    to="/"
+                    aria-label="Brand"
+                >
+                    <img
+                        :src="'/assets/images/redesain_logo.jpg'"
+                        alt="WTC Cell"
+                        class="h-10 w-auto object-contain"
+                    >
                 </RouterLink>
 
                 <!-- Search -->
