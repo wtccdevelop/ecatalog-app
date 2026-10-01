@@ -11,6 +11,9 @@ use App\Http\Controllers\Api\Admin\BannerController as AdminBannerController;
 use App\Http\Controllers\Api\Admin\StoreController as AdminStoreController;
 use App\Http\Controllers\Api\TrackController;
 use App\Http\Controllers\Api\Admin\StatisticsController as AdminStatisticsController;
+use App\Http\Controllers\Api\Admin\BenefitController as AdminBenefitController;
+use App\Http\Controllers\Api\Admin\PaymentMethodController as AdminPaymentMethodController;
+use App\Http\Controllers\Api\Admin\PriceCategoryController as AdminPriceCategoryController;
 
 Route::prefix('api/auth')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
@@ -47,6 +50,20 @@ Route::prefix('api/admin')->middleware('auth')->group(function () {
     // Statistik
     Route::get('statistics', [AdminStatisticsController::class, 'index']);
     Route::get('statistics/export/{type}', [AdminStatisticsController::class, 'export']);
+
+    // Benefit
+    Route::patch('benefits/{benefit}/toggle', [AdminBenefitController::class, 'toggle']);
+    Route::apiResource('benefits', AdminBenefitController::class)->except('show');
+
+    // Metode Pembayaran
+    Route::patch('payments/{payment}/toggle', [AdminPaymentMethodController::class, 'toggle']);
+    Route::apiResource('payments', AdminPaymentMethodController::class)->except('show');
+
+    // Kategori Harga
+    Route::patch('price-categories/{priceCategory}/toggle', [AdminPriceCategoryController::class, 'toggle']);
+    Route::apiResource('price-categories', AdminPriceCategoryController::class)
+        ->parameters(['price-categories' => 'priceCategory'])
+        ->except('show');
 });
 
 Route::view('/{any?}', 'welcome')->where('any', '.*');

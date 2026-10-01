@@ -3,13 +3,16 @@
         <nav class="max-w-[85rem] w-full mx-auto px-4 lg:flex lg:items-center lg:justify-between">
             <div class="flex items-center gap-2 w-full">
                 <!-- Logo -->
-                <RouterLink class="flex-none text-xl font-semibold dark:text-white focus:outline-hidden focus:opacity-80" to="/" aria-label="Brand">
-                    <span class="inline-flex items-center gap-x-2 text-xs sm:text-lg font-normal dark:text-white">
-                        <span class="uppercase font-audiowide antialiased">
-                            <span class="inline text-center">WTC</span>
-                            <span class="block md:inline font-poppins uppercase font-normal antialiased text-center">Cell</span>
-                        </span>
-                    </span>
+                <RouterLink
+                    class="flex-none text-xl font-semibold dark:text-white focus:outline-hidden focus:opacity-80"
+                    to="/"
+                    aria-label="Brand"
+                >
+                    <img
+                        :src="'/assets/images/redesain_logo.jpg'"
+                        alt="WTC Cell"
+                        class="h-10 w-auto object-contain"
+                    >
                 </RouterLink>
 
                 <!-- Search -->
@@ -63,7 +66,7 @@
             <!-- Desktop nav + Mobile dropdown -->
             <div :class="['overflow-hidden transition-all duration-300 basis-full grow lg:block', mobileOpen ? 'block' : 'hidden']">
                 <div class="flex flex-col gap-5 mt-5 lg:flex-row lg:items-center lg:justify-end lg:mt-0 lg:ps-5">
-                    <a class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" href="/#product">Product</a>
+                    <RouterLink class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" to="/products" @click="mobileOpen = false">Product</RouterLink>
                     <a class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" href="#">Events</a>
                     <a class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" href="#">Simulasi Kredit</a>
                     <RouterLink

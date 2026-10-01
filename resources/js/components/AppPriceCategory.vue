@@ -4,14 +4,14 @@
             <h2>Temukan Produk Kami Berdasarkan Budgetmu.</h2>
         </div>
         <div class="lg:grid lg:grid-cols-8 sm:gap-x-6 sm:justify-items-center">
-            <a
+            <RouterLink
                 v-for="cat in priceCategories"
                 :key="cat.id"
-                href="#"
+                :to="{ path: '/products', query: { price: cat.id } }"
                 class="inline-flex flex-col px-4 py-2 sm:px-6 sm:py-2 mr-3 sm:mr-0 items-center rounded-lg shadow-sm bg-blue-900 text-center cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-md text-white dark:text-gray-200 dark:bg-neutral-800"
             >
                 <span class="text-[10px] sm:text-base font-poppins">{{ cat.name }}</span>
-            </a>
+            </RouterLink>
         </div>
     </div>
 </template>
