@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('event_themes', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('name');
+            $table->string('slug')->unique();
+
+            $table->string('theme', 50);
+
+            $table->dateTime('starts_at');
+            $table->dateTime('ends_at');
+
+            $table->boolean('is_active')->default(true);
+
+            $table->json('settings')->nullable();
+
+            $table->timestamps();
+
+            $table->index(['starts_at', 'ends_at']);
+            $table->index('is_active');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('event_themes');
+    }
+};

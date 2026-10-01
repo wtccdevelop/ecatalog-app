@@ -16,6 +16,8 @@ use App\Http\Controllers\Api\Admin\PaymentMethodController as AdminPaymentMethod
 use App\Http\Controllers\Api\Admin\PriceCategoryController as AdminPriceCategoryController;
 use App\Http\Controllers\Api\Admin\SocialLinkController as AdminSocialLinkController;
 use App\Http\Controllers\Api\Admin\SettingController as AdminSettingController;
+use App\Http\Controllers\Api\EventThemeController;
+use App\Http\Controllers\Api\Admin\EventThemeController as AdminEventThemeController;
 
 Route::prefix('api/auth')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
@@ -24,6 +26,7 @@ Route::prefix('api/auth')->group(function () {
 });
 
 Route::post('api/track', TrackController::class)->middleware('throttle:120,1');
+Route::get('api/event-theme/active', EventThemeController::class);
 
 // ---------- ADMIN (wajib login) ----------
 Route::prefix('api/admin')->middleware('auth')->group(function () {
@@ -71,9 +74,16 @@ Route::prefix('api/admin')->middleware('auth')->group(function () {
     Route::patch('socials/{social}/toggle', [AdminSocialLinkController::class, 'toggle']);
     Route::apiResource('socials', AdminSocialLinkController::class)->except('show');
 
+    // Tema Event
+    Route::patch('event-themes/{eventTheme}/toggle', [AdminEventThemeController::class, 'toggle']);
+    Route::apiResource('event-themes', AdminEventThemeController::class)
+        ->except('show');
+
     // Pengaturan
     Route::get('settings', [AdminSettingController::class, 'index']);
     Route::put('settings', [AdminSettingController::class, 'update']);
+
+    
 });
 
 Route::view('/{any?}', 'welcome')->where('any', '.*');
