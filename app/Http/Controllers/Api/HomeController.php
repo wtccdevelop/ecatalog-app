@@ -84,6 +84,7 @@ class HomeController extends Controller
             'products_by_brand' => $brands
                 ->map(fn ($b) => [
                     'brand'    => $b->name,
+                    'slug'     => $b->slug,
                     'products' => $b->products->map(function ($p) {
                         $price = $p->variants->min('price');
 

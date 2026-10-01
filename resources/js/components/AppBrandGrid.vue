@@ -9,11 +9,11 @@
                 :key="brand.id"
                 class="inline-block w-[4.5rem] md:w-[10.6rem] h-auto rounded-lg mr-4 md:mr-0 overflow-hidden text-center cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-1 flex flex-col items-center"
             >
-                <a href="#" class="w-full">
+                <RouterLink :to="{ path: '/products', query: { brand: brand.slug } }" class="w-full">
                     <div class="w-full h-auto aspect-square overflow-hidden rounded-lg">
                         <img class="w-full h-full object-cover" :src="brand.logo" :alt="brand.name" loading="lazy" />
                     </div>
-                </a>
+                </RouterLink>
             </div>
         </div>
     </div>

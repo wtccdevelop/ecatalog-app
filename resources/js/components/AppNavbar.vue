@@ -66,7 +66,7 @@
             <!-- Desktop nav + Mobile dropdown -->
             <div :class="['overflow-hidden transition-all duration-300 basis-full grow lg:block', mobileOpen ? 'block' : 'hidden']">
                 <div class="flex flex-col gap-5 mt-5 lg:flex-row lg:items-center lg:justify-end lg:mt-0 lg:ps-5">
-                    <a class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" href="/#product">Product</a>
+                    <RouterLink class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" to="/products" @click="mobileOpen = false">Product</RouterLink>
                     <a class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" href="#">Events</a>
                     <a class="font-medium text-gray-600 hover:text-green-400 dark:text-neutral-400" href="#">Simulasi Kredit</a>
                     <RouterLink

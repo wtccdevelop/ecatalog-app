@@ -13,15 +13,15 @@
             <!-- Brand header -->
             <div class="flex justify-between items-center mb-4">
                 <h2 class="md:text-xl font-bold dark:text-white">{{ group.brand }}</h2>
-                <a
-                    href="#"
+                <RouterLink
+                    :to="{ path: '/products', query: { brand: group.slug } }"
                     class="py-2 px-4 inline-flex items-center gap-x-2 text-xs sm:text-sm font-semibold rounded-lg border border-gray-200 bg-white text-blue-600 shadow-sm hover:bg-gray-50 dark:bg-neutral-800 dark:border-teal-800 dark:text-white dark:hover:bg-teal-900 transition-colors duration-500"
                 >
                     Lihat Semua
                     <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="m9 18 6-6-6-6" />
                     </svg>
-                </a>
+                </RouterLink>
             </div>
 
             <!-- Product grid -->
