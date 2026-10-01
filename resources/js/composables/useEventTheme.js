@@ -1,12 +1,14 @@
 import { computed } from 'vue';
-import { useCatalogStore } from '@/stores/catalog';
-import eventThemes from '@/config/eventThemes';
+import { catalog } from '../stores/catalog.js';
+import eventThemes from '../config/eventThemes.js';
 
 export function useEventTheme() {
-    const catalogStore = useCatalogStore();
-
     const activeTheme = computed(() => {
-        return catalogStore.eventTheme || null;
+        if (!catalog.eventTheme?.active) {
+            return null;
+        }
+
+        return catalog.eventTheme?.event || null;
     });
 
     const themeType = computed(() => {
@@ -35,7 +37,10 @@ export function useEventTheme() {
     });
 
     const isActive = computed(() => {
-        return themeType.value !== 'default';
+        return (
+            catalog.eventTheme?.active === true &&
+            themeType.value !== 'default'
+        );
     });
 
     return {

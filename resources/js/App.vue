@@ -14,7 +14,7 @@ import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import AppNavbar from './components/AppNavbar.vue';
 import AppFooter from './components/AppFooter.vue';
-import { loadSite } from './stores/catalog.js';
+import { loadSite, loadEventTheme,} from './stores/catalog.js';
 import EventDecoration from '@/components/EventDecoration.vue';
 
 const route = useRoute();
@@ -36,12 +36,18 @@ function toggleDark() {
 
 onMounted(() => {
     let saved = null;
-    try { saved = localStorage.getItem('theme'); } catch (e) {}
+
+    try {
+        saved = localStorage.getItem('theme');
+    } catch (e) {}
+
     isDark.value = saved
         ? saved === 'dark'
         : window.matchMedia('(prefers-color-scheme: dark)').matches;
+
     applyTheme();
 
     loadSite().catch(() => {});
+    loadEventTheme().catch(() => {});
 });
 </script>
