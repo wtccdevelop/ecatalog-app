@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Admin\StatisticsController as AdminStatisticsContro
 use App\Http\Controllers\Api\Admin\BenefitController as AdminBenefitController;
 use App\Http\Controllers\Api\Admin\PaymentMethodController as AdminPaymentMethodController;
 use App\Http\Controllers\Api\Admin\PriceCategoryController as AdminPriceCategoryController;
+use App\Http\Controllers\Api\Admin\SocialLinkController as AdminSocialLinkController;
 
 Route::prefix('api/auth')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
@@ -64,6 +65,10 @@ Route::prefix('api/admin')->middleware('auth')->group(function () {
     Route::apiResource('price-categories', AdminPriceCategoryController::class)
         ->parameters(['price-categories' => 'priceCategory'])
         ->except('show');
+
+    // Sosial Media
+    Route::patch('socials/{social}/toggle', [AdminSocialLinkController::class, 'toggle']);
+    Route::apiResource('socials', AdminSocialLinkController::class)->except('show');
 });
 
 Route::view('/{any?}', 'welcome')->where('any', '.*');

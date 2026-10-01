@@ -112,8 +112,9 @@ const menu = [
     { label: 'Benefit',          to: '/admin/benefits',        icon: I.list },
     { label: 'Metode Pembayaran',to: '/admin/payments',        icon: I.list},
     { label: 'Kategori Harga',   to: '/admin/price-categories',icon: I.list},
-    { label: 'Sosial Media',     to: '/admin/socials',         icon: I.list,  soon: true },
+    { label: 'Sosial Media',     to: '/admin/socials',         icon: I.list},
     { label: 'Pengaturan',       to: '/admin/settings',        icon: I.list,  soon: true },
+    { label: 'Tema Event',       to: '/admin/settings',        icon: I.list,  soon: true },
     { label: 'Statistik',        to: '/admin/statistics',      icon: I.chart},
 ];
 
