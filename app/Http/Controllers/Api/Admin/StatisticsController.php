@@ -27,7 +27,7 @@ class StatisticsController extends Controller
             'browsers'     => $s->browsers(),
             'sources'      => $s->sources(),
             'keywords'     => $s->keywords(),
-            'recent'       => $s->visitors(50),
+            'recent'       => $s->visitors(500),
         ]);
     }
 
