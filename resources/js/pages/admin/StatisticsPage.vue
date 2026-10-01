@@ -125,6 +125,7 @@
                         </tbody>
                     </table>
                 </div>
+                    <MiniPager v-model:page="recentPage" :total="data.recent.length" :per-page="RECENT_PER_PAGE" />
             </ChartCard>
         </template>
     </div>
@@ -141,6 +142,14 @@ import ColumnChart from '../../components/admin/charts/ColumnChart.vue';
 import DonutChart from '../../components/admin/charts/DonutChart.vue';
 import RankList from '../../components/admin/charts/RankList.vue';
 import Heatmap from '../../components/admin/charts/Heatmap.vue';
+import MiniPager from '../../components/admin/charts/MiniPager.vue';
+
+const RECENT_PER_PAGE = 10;
+const recentPage = ref(1);
+const recentPaged = computed(() => {
+    const start = (recentPage.value - 1) * RECENT_PER_PAGE;
+    return data.value.recent.slice(start, start + RECENT_PER_PAGE);
+});
 
 const dateInput = 'px-3 py-1.5 rounded-lg border border-gray-200 bg-white text-xs dark:bg-neutral-800 dark:border-neutral-600 dark:text-white focus:border-indigo-400 focus:ring-indigo-400';
 const presets = [7, 30, 90];

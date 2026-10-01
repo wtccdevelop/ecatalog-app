@@ -29,6 +29,8 @@ class Stats
 
     private const TYPES = ['smartphone' => 'Smartphone', 'tablet' => 'Tablet', 'desktop' => 'Desktop'];
 
+    private const LIST_LIMIT = 200;
+    
     private const EVENT_SUMS = "
         SUM(CASE WHEN event = 'pageview' THEN 1 ELSE 0 END) AS pv,
         SUM(CASE WHEN event = 'wa_click' THEN 1 ELSE 0 END) AS wa,
@@ -122,7 +124,7 @@ class Stats
     {
         return $this->views()->where('event', 'pageview')
             ->selectRaw('path, COUNT(*) AS views, COUNT(DISTINCT visitor_day_id) AS visitors')
-            ->groupBy('path')->orderByDesc('views')->limit(15)->get()
+            ->groupBy('path')->orderByDesc('views')->limit(self::LIST_LIMIT)->get()
             ->map(fn ($r) => ['path' => $r->path, 'views' => (int) $r->views, 'visitors' => (int) $r->visitors])
             ->all();
     }
@@ -138,7 +140,7 @@ class Stats
                 SUM(CASE WHEN v.event = 'installment_view' THEN 1 ELSE 0 END) AS installments")
             ->groupBy('p.id', 'p.name')
             ->orderByDesc('views')->orderByDesc('wa_clicks')
-            ->limit(15)->get()
+            ->limit(self::LIST_LIMIT)->get()
             ->map(fn ($r) => [
                 'name'         => $r->name,
                 'views'        => (int) $r->views,
@@ -147,17 +149,18 @@ class Stats
             ])->all();
     }
 
-    private function breakdown(string $col, string $fallback, array $map = []): array
+    private function breakdown(string $col, string $fallback, array $map = [], int $limit = 10): array
     {
         return $this->days()
             ->selectRaw("COALESCE($col, '$fallback') AS label, COUNT(*) AS total")
-            ->groupBy('label')->orderByDesc('total')->limit(10)->get()
+            ->groupBy('label')->orderByDesc('total')->limit($limit)->get()
             ->map(fn ($r) => ['label' => $map[$r->label] ?? $r->label, 'total' => (int) $r->total])
             ->all();
     }
 
+    public function brands(): array { return $this->breakdown('device_brand', 'Tidak diketahui', [], self::LIST_LIMIT); }
+
     public function deviceTypes(): array { return $this->breakdown('device_type', 'Tidak diketahui', self::TYPES); }
-    public function brands(): array      { return $this->breakdown('device_brand', 'Tidak diketahui'); }
     public function os(): array          { return $this->breakdown('os', 'Tidak diketahui'); }
     public function browsers(): array    { return $this->breakdown('browser', 'Tidak diketahui'); }
     public function sources(): array     { return $this->breakdown('referrer_source', 'direct', self::SOURCES); }
@@ -166,14 +169,14 @@ class Stats
     {
         return $this->views()->where('event', 'search')->whereNotNull('search_keyword')
             ->selectRaw('LOWER(search_keyword) AS keyword, COUNT(*) AS total')
-            ->groupBy('keyword')->orderByDesc('total')->limit(15)->get()
+            ->groupBy('keyword')->orderByDesc('total')->limit(self::LIST_LIMIT)->get()
             ->map(fn ($r) => ['keyword' => $r->keyword, 'total' => (int) $r->total])
             ->all();
     }
 
     public function visitors(int $limit = 50): array
     {
-        return $this->days()->orderByDesc('last_visit_at')->limit($limit)
+        return $this->days()->orderByDesc('last_visit_at')->limit(self::LIST_LIMIT)
             ->get(['visit_date', 'device_type', 'device_brand', 'device_model', 'os', 'browser',
                    'referrer_source', 'page_views_count', 'first_visit_at', 'last_visit_at'])
             ->map(function ($r) {

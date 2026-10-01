@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class SocialLink extends Model
 {
-    //
+    protected $guarded = [];
+
+    protected function casts(): array
+    {
+        return [
+            'is_active' => 'boolean',
+        ];
+    }
 }

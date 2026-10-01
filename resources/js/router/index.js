@@ -16,6 +16,8 @@ import BenefitsPage from '../pages/admin/BenefitsPage.vue';
 import PaymentsPage from '../pages/admin/PaymentsPage.vue';
 import PriceCategoriesPage from '../pages/admin/PriceCategoriesPage.vue';
 import ProductsPage from '../pages/ProductsPage.vue';
+import SocialsPage from '../pages/admin/SocialsPage.vue';
+import SettingsPage from '../pages/admin/SettingsPage.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -40,7 +42,8 @@ const router = createRouter({
                 { path: 'benefits', name: 'admin.benefits', component: BenefitsPage, meta: { title: 'Benefit' } },
                 { path: 'payments', name: 'admin.payments', component: PaymentsPage, meta: { title: 'Metode Pembayaran' } },
                 { path: 'price-categories', name: 'admin.price-categories', component: PriceCategoriesPage, meta: { title: 'Kategori Harga' } },
-
+                { path: 'socials', name: 'admin.socials', component: SocialsPage, meta: { title: 'Sosial Media' } },
+                { path: 'settings', name: 'admin.settings', component: SettingsPage, meta: { title: 'Pengaturan' } },
             ],
         },
         { path: '/:pathMatch(.*)*', redirect: '/' },
