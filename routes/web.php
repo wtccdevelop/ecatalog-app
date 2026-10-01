@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\Admin\BrandController as AdminBrandController;
 use App\Http\Controllers\Api\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Api\Admin\ProductController as AdminProductController;
@@ -23,7 +22,6 @@ Route::prefix('api/auth')->group(function () {
 });
 
 Route::post('api/track', TrackController::class)->middleware('throttle:120,1');
-Route::get('api/products', [ProductController::class, 'index']);
 
 // ---------- ADMIN (wajib login) ----------
 Route::prefix('api/admin')->middleware('auth')->group(function () {

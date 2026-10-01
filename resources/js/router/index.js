@@ -22,6 +22,7 @@ const router = createRouter({
     routes: [
         { path: '/', name: 'home', component: HomePage },
         { path: '/product/:slug', name: 'product', component: ProductDetail },
+        { path: '/products', name: 'products', component: ProductsPage },
         { path: '/login', name: 'login', component: LoginPage, meta: { guestOnly: true, hideChrome: true } },
         {
             path: '/admin',
@@ -39,7 +40,7 @@ const router = createRouter({
                 { path: 'benefits', name: 'admin.benefits', component: BenefitsPage, meta: { title: 'Benefit' } },
                 { path: 'payments', name: 'admin.payments', component: PaymentsPage, meta: { title: 'Metode Pembayaran' } },
                 { path: 'price-categories', name: 'admin.price-categories', component: PriceCategoriesPage, meta: { title: 'Kategori Harga' } },
-                { path: '/products', name: 'products', component: ProductsPage },
+
             ],
         },
         { path: '/:pathMatch(.*)*', redirect: '/' },
