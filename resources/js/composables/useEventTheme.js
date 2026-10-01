@@ -16,10 +16,18 @@ export function useEventTheme() {
             return 'default';
         }
 
+        // Backend menyimpan jenis tema di field "theme".
+        // Contoh:
+        // name  = Natal
+        // slug  = natal
+        // theme = christmas
+        //
+        // Yang harus dipakai untuk mencari konfigurasi
+        // eventThemes.js adalah "theme".
         return (
+            activeTheme.value.theme ||
             activeTheme.value.type ||
             activeTheme.value.slug ||
-            activeTheme.value.theme ||
             'default'
         );
     });
