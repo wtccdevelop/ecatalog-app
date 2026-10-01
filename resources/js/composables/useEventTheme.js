@@ -1,52 +1,49 @@
 import { computed } from 'vue';
-import { catalog } from '../stores/catalog.js';
-import {
-    getEventTheme,
-    getThemeDecorations,
-    hasThemeDecoration,
-} from '../eventThemes/index.js';
+import { useCatalogStore } from '@/stores/catalog';
+import eventThemes from '@/config/eventThemes';
 
 export function useEventTheme() {
-    const activeEvent = computed(() => {
-        return catalog.eventTheme?.active
-            ? catalog.eventTheme.event
-            : null;
+    const catalogStore = useCatalogStore();
+
+    const activeTheme = computed(() => {
+        return catalogStore.eventTheme || null;
     });
 
-    const theme = computed(() => {
-        if (!activeEvent.value) return null;
+    const themeType = computed(() => {
+        if (!activeTheme.value) {
+            return 'default';
+        }
 
-        return getEventTheme(activeEvent.value.theme);
+        return (
+            activeTheme.value.type ||
+            activeTheme.value.slug ||
+            activeTheme.value.theme ||
+            'default'
+        );
+    });
+
+    const themeConfig = computed(() => {
+        return eventThemes[themeType.value] || eventThemes.default;
+    });
+
+    const assets = computed(() => {
+        return themeConfig.value.assets || {};
+    });
+
+    const decorations = computed(() => {
+        return themeConfig.value.decorations || [];
     });
 
     const isActive = computed(() => {
-        return !!activeEvent.value && !!theme.value;
+        return themeType.value !== 'default';
     });
 
-    function decorations(area = 'product') {
-        if (!theme.value) return [];
-
-        return getThemeDecorations(
-            theme.value.slug,
-            area
-        );
-    }
-
-    function hasDecoration(decoration, area = 'product') {
-        if (!theme.value) return false;
-
-        return hasThemeDecoration(
-            theme.value.slug,
-            decoration,
-            area
-        );
-    }
-
     return {
-        activeEvent,
-        theme,
-        isActive,
+        activeTheme,
+        themeType,
+        themeConfig,
+        assets,
         decorations,
-        hasDecoration,
+        isActive,
     };
 }

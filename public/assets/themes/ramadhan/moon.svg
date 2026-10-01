@@ -1,0 +1,11 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Bulan hijau -->
+    <path d="M119 25C101 49 100 79 115 103C130 127 156 138 145 144C112 162 67 148 49 116C30 82 42 38 75 21C91 13 108 13 119 25Z" fill="#16804B"></path>
+
+    <!-- Aksen emas -->
+    <circle cx="135" cy="48" r="4" fill="#F4C542"></circle>
+    <circle cx="155" cy="78" r="3" fill="#F4C542"></circle>
+    <circle cx="126" cy="102" r="3" fill="#F4C542"></circle>
+
+</svg>

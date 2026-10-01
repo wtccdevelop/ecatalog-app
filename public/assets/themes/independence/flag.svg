@@ -1,0 +1,12 @@
+<svg width="220" height="180" viewBox="0 0 220 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Tiang -->
+    <path d="M25 10V170" stroke="#6B7280" stroke-width="6"></path>
+
+    <!-- Bendera -->
+    <path d="M28 20C75 5 110 40 160 25C175 20 188 18 200 25V105C180 98 165 100 145 105C95 118 65 85 28 100V20Z" fill="white"></path>
+
+    <!-- Merah -->
+    <path d="M28 20C75 5 110 40 160 25C175 20 188 18 200 25V62C180 55 165 57 145 62C95 75 65 42 28 57V20Z" fill="#D62828"></path>
+
+</svg>

@@ -1,0 +1,21 @@
+<svg width="120" height="200" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Tali -->
+    <path d="M60 5V35" stroke="#C99A2E" stroke-width="5"></path>
+
+    <!-- Atas lampu -->
+    <path d="M40 35H80L90 55H30L40 35Z" fill="#16804B"></path>
+
+    <!-- Badan -->
+    <path d="M30 55H90V145L75 165H45L30 145V55Z" fill="#0F6B3D"></path>
+
+    <!-- Cahaya -->
+    <path d="M45 65H75V135H45V65Z" fill="#FFE7A0"></path>
+
+    <!-- Bawah -->
+    <path d="M30 145H90L75 170H45L30 145Z" fill="#C99A2E"></path>
+
+    <!-- Tali bawah -->
+    <path d="M60 170V195" stroke="#C99A2E" stroke-width="5"></path>
+
+</svg>

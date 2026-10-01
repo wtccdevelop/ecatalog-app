@@ -1,0 +1,12 @@
+<svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+    <g fill="#FFD84D">
+        <path d="M110 10L116 34L140 40L116 46L110 70L104 46L80 40L104 34L110 10Z"></path>
+        <path d="M55 90L59 106L75 110L59 114L55 130L51 114L35 110L51 106L55 90Z"></path>
+    </g>
+
+    <g fill="white">
+        <path d="M170 105L175 125L195 130L175 135L170 155L165 135L145 130L165 125L170 105Z"></path>
+    </g>
+
+</svg>

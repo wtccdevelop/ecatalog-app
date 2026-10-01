@@ -2,6 +2,7 @@
     <div class="font-poppins" :class="{ dark: isDark }">
         <div class="bg-white dark:bg-neutral-800 min-h-screen">
             <AppNavbar v-if="showChrome" :is-dark="isDark" @toggle-dark="toggleDark" />
+            <EventDecoration />
             <RouterView />
             <AppFooter v-if="showChrome" />
         </div>
@@ -14,6 +15,7 @@ import { useRoute } from 'vue-router';
 import AppNavbar from './components/AppNavbar.vue';
 import AppFooter from './components/AppFooter.vue';
 import { loadSite } from './stores/catalog.js';
+import EventDecoration from '@/components/EventDecoration.vue';
 
 const route = useRoute();
 

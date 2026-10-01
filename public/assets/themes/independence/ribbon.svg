@@ -1,0 +1,9 @@
+<svg width="220" height="160" viewBox="0 0 220 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Pita merah -->
+    <path d="M15 30C70 60 120 55 205 20" stroke="#D62828" stroke-width="22" stroke-linecap="round"></path>
+
+    <!-- Pita putih -->
+    <path d="M15 30C70 60 120 55 205 20" stroke="white" stroke-width="11" stroke-linecap="round"></path>
+
+</svg>
