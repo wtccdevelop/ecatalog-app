@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Admin\BenefitController as AdminBenefitController;
 use App\Http\Controllers\Api\Admin\PaymentMethodController as AdminPaymentMethodController;
 use App\Http\Controllers\Api\Admin\PriceCategoryController as AdminPriceCategoryController;
 use App\Http\Controllers\Api\Admin\SocialLinkController as AdminSocialLinkController;
+use App\Http\Controllers\Api\Admin\SettingController as AdminSettingController;
 
 Route::prefix('api/auth')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
@@ -69,6 +70,10 @@ Route::prefix('api/admin')->middleware('auth')->group(function () {
     // Sosial Media
     Route::patch('socials/{social}/toggle', [AdminSocialLinkController::class, 'toggle']);
     Route::apiResource('socials', AdminSocialLinkController::class)->except('show');
+
+    // Pengaturan
+    Route::get('settings', [AdminSettingController::class, 'index']);
+    Route::put('settings', [AdminSettingController::class, 'update']);
 });
 
 Route::view('/{any?}', 'welcome')->where('any', '.*');
