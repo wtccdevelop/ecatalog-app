@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             PriceCategorySeeder::class,
             BannerSeeder::class,
             ProductSeeder::class,   // harus setelah BrandSeeder
+            ProductVariantSpecSeeder::class,
             StoreSeeder::class,
             SocialLinkSeeder::class,
             BenefitSeeder::class,

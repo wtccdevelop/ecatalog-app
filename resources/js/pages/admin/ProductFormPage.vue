@@ -70,41 +70,69 @@
                     <div
                         v-for="(v, i) in variants"
                         :key="v.key"
-                        class="grid grid-cols-2 sm:grid-cols-6 gap-2 items-end p-3 rounded-lg bg-gray-50 dark:bg-neutral-900"
+                        class="p-3 rounded-lg bg-gray-50 dark:bg-neutral-900 space-y-2"
                     >
-                        <div>
-                            <label :class="lblSm">RAM (GB)</label>
-                            <input v-model.number="v.ram" type="number" min="0" :class="input" />
+                        <!-- Baris 1: field teks -->
+                        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2 items-end">
+                            <div>
+                                <label :class="lblSm">RAM (GB)</label>
+                                <input v-model.number="v.ram" type="number" min="0" :class="input" />
+                            </div>
+                            <div>
+                                <label :class="lblSm">Storage (GB)</label>
+                                <input v-model.number="v.storage" type="number" min="0" :class="input" />
+                            </div>
+                            <div>
+                                <label :class="lblSm">Warna</label>
+                                <input v-model="v.color" type="text" :class="input" />
+                            </div>
+                            <div>
+                                <label :class="lblSm">Harga (Rp)</label>
+                                <input v-model.number="v.price" type="number" min="0" :class="input" />
+                                <p class="mt-0.5 text-[10px] text-gray-500">{{ formatRupiah(v.price || 0) }}</p>
+                            </div>
+                            <div>
+                                <label :class="lblSm">Stok</label>
+                                <input v-model.number="v.stock" type="number" min="0" :class="input" />
+                            </div>
+                            <div class="flex items-center justify-between gap-2 pb-2">
+                                <label class="flex items-center gap-1.5 text-xs text-gray-700 dark:text-gray-300">
+                                    <input v-model="v.is_active" type="checkbox" class="rounded border-gray-300" />
+                                    Aktif
+                                </label>
+                                <button
+                                    type="button"
+                                    :disabled="variants.length === 1"
+                                    @click="variants.splice(i, 1)"
+                                    class="text-red-600 text-sm disabled:opacity-30 disabled:cursor-not-allowed"
+                                    aria-label="Hapus varian"
+                                >✕</button>
+                            </div>
                         </div>
-                        <div>
-                            <label :class="lblSm">Storage (GB)</label>
-                            <input v-model.number="v.storage" type="number" min="0" :class="input" />
-                        </div>
-                        <div>
-                            <label :class="lblSm">Warna</label>
-                            <input v-model="v.color" type="text" :class="input" />
-                        </div>
-                        <div>
-                            <label :class="lblSm">Harga (Rp)</label>
-                            <input v-model.number="v.price" type="number" min="0" :class="input" />
-                            <p class="mt-0.5 text-[10px] text-gray-500">{{ formatRupiah(v.price || 0) }}</p>
-                        </div>
-                        <div>
-                            <label :class="lblSm">Stok</label>
-                            <input v-model.number="v.stock" type="number" min="0" :class="input" />
-                        </div>
-                        <div class="flex items-center justify-between gap-2 pb-2">
-                            <label class="flex items-center gap-1.5 text-xs text-gray-700 dark:text-gray-300">
-                                <input v-model="v.is_active" type="checkbox" class="rounded border-gray-300" />
-                                Aktif
-                            </label>
-                            <button
-                                type="button"
-                                :disabled="variants.length === 1"
-                                @click="variants.splice(i, 1)"
-                                class="text-red-600 text-sm disabled:opacity-30 disabled:cursor-not-allowed"
-                                aria-label="Hapus varian"
-                            >✕</button>
+
+                        <!-- Baris 2: gambar varian -->
+                        <div class="flex items-center gap-3 pt-1 border-t border-gray-200 dark:border-neutral-700">
+                            <img
+                                v-if="v.imagePreview"
+                                :src="v.imagePreview"
+                                alt="Preview gambar varian"
+                                class="size-14 rounded-lg object-contain border border-gray-200 dark:border-neutral-600 bg-white dark:bg-neutral-700 shrink-0"
+                            />
+                            <div v-else class="size-14 rounded-lg border border-dashed border-gray-300 dark:border-neutral-600 flex items-center justify-center text-gray-400 shrink-0">
+                                <svg class="size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5a1.5 1.5 0 0 0 1.5-1.5V4.5a1.5 1.5 0 0 0-1.5-1.5H3.75a1.5 1.5 0 0 0-1.5 1.5v15a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V9.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <label :class="lblSm">Gambar Varian (opsional)</label>
+                                <input
+                                    type="file"
+                                    accept="image/png,image/jpeg,image/webp"
+                                    @change="onVariantImage($event, v)"
+                                    class="text-xs text-gray-600 dark:text-gray-300"
+                                />
+                                <p class="mt-0.5 text-[10px] text-gray-500">PNG/JPG/WEBP, maks. 3 MB. Jika tidak diisi, gambar utama produk yang dipakai.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -228,7 +256,7 @@ const router = useRouter();
 const id = computed(() => route.params.id ?? null);
 
 let seq = 0;
-const blankVariant = () => ({ key: ++seq, ram: null, storage: null, color: '', price: 0, stock: 0, is_active: true });
+const blankVariant = () => ({ key: ++seq, ram: null, storage: null, color: '', price: 0, stock: 0, is_active: true, image: null, imagePreview: null });
 const blankSpec = () => ({ key: ++seq, label: '', value: '' });
 
 const brands = ref([]);
@@ -273,7 +301,7 @@ function fill(p) {
         image: null,
     });
     preview.value = p.image;
-    variants.value = p.variants.length ? p.variants.map((v) => ({ ...v, key: ++seq })) : [blankVariant()];
+    variants.value = p.variants.length ? p.variants.map((v) => ({ ...v, key: ++seq, image: null, imagePreview: v.image ?? null })) : [blankVariant()];
     specs.value = p.specs.map((s) => ({ key: ++seq, label: s.label, value: s.value ?? '' }));
     gallery.value = p.gallery;
     reviews.value = p.reviews;
@@ -306,6 +334,13 @@ function onImage(e) {
     if (!f) return;
     form.image = f;
     preview.value = URL.createObjectURL(f);
+}
+
+function onVariantImage(e, v) {
+    const f = e.target.files[0];
+    if (!f) return;
+    v.image = f;
+    v.imagePreview = URL.createObjectURL(f);
 }
 
 function fillTemplate() {
@@ -344,6 +379,13 @@ async function submit() {
                     .filter((s) => s.label.trim())
                     .map((s) => ({ label: s.label.trim(), value: s.value?.trim() || null }))
             ),
+        });
+
+        // lampirkan gambar per-varian (hanya yang baru di-upload)
+        variants.value.forEach((v, i) => {
+            if (v.image instanceof File) {
+                fd.append(`variant_images[${i}]`, v.image);
+            }
         });
         if (id.value) fd.append('_method', 'PUT');
 

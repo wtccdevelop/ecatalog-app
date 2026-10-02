@@ -70,14 +70,34 @@
                 </RouterLink>
             </div>
 
-            <!-- Load more -->
-            <div v-if="group.products.length > shown(group)" class="text-center mt-6">
+            <!-- Load more / less -->
+            <div
+                v-if="group.products.length > shown(group) || shown(group) > INITIAL_COUNT"
+                class="flex flex-wrap items-center justify-center gap-2 mt-6"
+            >
                 <button
+                    v-if="shown(group) > INITIAL_COUNT"
+                    type="button"
+                    @click="loadLess(group)"
+                    class="py-2 px-4 inline-flex items-center gap-x-2 text-xs sm:text-sm font-semibold rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 dark:bg-neutral-800 dark:border-teal-800 dark:text-white dark:hover:bg-teal-900 transition-colors duration-500"
+                >
+                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m18 15-6-6-6 6" />
+                    </svg>
+                    Tampilkan Lebih Sedikit
+                </button>
+
+                <button
+                    v-if="group.products.length > shown(group)"
+                    type="button"
                     @click="loadMore(group)"
                     class="py-2 px-4 inline-flex items-center gap-x-2 text-xs sm:text-sm font-semibold rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 dark:bg-neutral-800 dark:border-teal-800 dark:text-white dark:hover:bg-teal-900 transition-colors duration-500"
                 >
                     Tampilkan Lebih Banyak {{ group.brand }}
                     ({{ shown(group) }} / {{ group.products.length }} Items)
+                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m6 9 6 6 6-6" />
+                    </svg>
                 </button>
             </div>
         </div>
@@ -85,13 +105,9 @@
 </template>
 
 <script setup>
-import { computed, reactive } from 'vue';
+import { computed, reactive, nextTick } from 'vue';
 import { catalog } from '../stores/catalog.js';
 import { formatRupiah, monthly24 } from '../lib/format.js';
-import EventDecor from './event/EventDecor.vue';
-import { useEventTheme } from '../composables/useEventTheme.js';
-
-const eventTheme = useEventTheme();
 
 const INITIAL_COUNT = 4;
 const LOAD_MORE_COUNT = 4;
@@ -106,5 +122,15 @@ const visibleProducts = (group) => group.products.slice(0, shown(group));
 
 function loadMore(group) {
     perPage[group.brand] = Math.min(shown(group) + LOAD_MORE_COUNT, group.products.length);
+}
+
+// kurangi satu baris; selalu turun ke kelipatan baris, minimal INITIAL_COUNT
+function loadLess(group) {
+    const rowStart = Math.ceil(shown(group) / LOAD_MORE_COUNT) * LOAD_MORE_COUNT - LOAD_MORE_COUNT;
+    perPage[group.brand] = Math.max(INITIAL_COUNT, rowStart);
+
+    nextTick(() => {
+        document.getElementById(`brand-${group.slug}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
 }
 </script>

@@ -31,8 +31,8 @@
                             <!-- Gambar -->
                             <div class="md:w-1/2 p-6 flex flex-col items-center">
                                 <img
-                                    class="h-auto w-full object-contain md:max-w-lg dark:bg-neutral-500 rounded-lg"
-                                    :src="detail.image"
+                                    class="h-auto w-full object-contain md:max-w-lg dark:bg-neutral-500 rounded-lg transition-opacity duration-200"
+                                    :src="activeImage"
                                     :alt="`${detail.name} ${variantLabel}`"
                                 />
                             </div>
@@ -87,7 +87,8 @@
                                     <p class="text-gray-700 dark:text-white font-semibold mb-1 text-xs">Harga:</p>
                                     <p class="font-extrabold text-blue-600 text-lg dark:text-blue-400">{{ formatRupiah(activeVariant.price) }}</p>
                                     <p class="mt-1 text-[11px] text-gray-500 dark:text-neutral-400">
-                                        Stok tersedia: {{ activeVariant.stock }} unit
+                                        Stok tersedia: {{ activeVariant.stock }} unit 
+                                        <span v-if="stockDate" class="italic">*update {{ stockDate }}</span>
                                     </p>
                                 </div>
 
@@ -257,6 +258,14 @@ function openInstallment() {
     track('installment_view');
 }
 
+const stockDate = computed(() => {
+    const d = activeVariant.value.stock_updated_at;
+    if (!d) return '';
+    return new Date(d).toLocaleDateString('id-ID', {
+        day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Jakarta',
+    });
+});
+
 const route = useRoute();
 
 const detail = ref(null);
@@ -290,6 +299,8 @@ const activeVariant = computed(() => {
 const variantLabel = computed(() =>
     [activeVariant.value.storage, activeVariant.value.color].filter(Boolean).join(' - ')
 );
+
+const activeImage = computed(() => activeVariant.value.image || detail.value?.image || '');
 
 const installments = computed(() => buildInstallments(activeVariant.value.price));
 const lowestInstallment = computed(() => installments.value.find((i) => i.tenure === 24));
