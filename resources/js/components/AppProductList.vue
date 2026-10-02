@@ -108,10 +108,13 @@
 import { computed, reactive, nextTick } from 'vue';
 import { catalog } from '../stores/catalog.js';
 import { formatRupiah, monthly24 } from '../lib/format.js';
+import { useEventTheme } from '../composables/useEventTheme.js';
+import EventDecor from './event/EventDecor.vue';
 
 const INITIAL_COUNT = 4;
 const LOAD_MORE_COUNT = 4;
 
+const eventTheme = useEventTheme();
 const groups = computed(() => catalog.home?.products_by_brand ?? []);
 
 // jumlah tampil per brand
