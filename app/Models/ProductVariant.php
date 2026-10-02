@@ -11,7 +11,8 @@ class ProductVariant extends Model
     protected function casts(): array
     {
         return [
-            'is_active' => 'boolean',
+            'is_active'        => 'boolean',
+            'stock_updated_at' => 'datetime',
         ];
     }
 

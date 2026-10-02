@@ -164,15 +164,29 @@ class ProductController extends Controller
 
     private function sync(Product $p, array $variants, array $specs): void
     {
+        // peta stok lama: kunci ram|storage|color
+        $old = $p->variants()->get()->mapWithKeys(fn ($v) => [
+            $v->ram.'|'.$v->storage.'|'.mb_strtolower((string) $v->color) => $v,
+        ]);
+
         $p->variants()->delete();
+
         foreach ($variants as $v) {
+            $key  = ($v['ram'] ?? null).'|'.($v['storage'] ?? null).'|'.mb_strtolower((string) ($v['color'] ?? ''));
+            $prev = $old->get($key);
+            $stock = (int) $v['stock'];
+
             $p->variants()->create([
                 'ram'       => $v['ram'] ?? null,
                 'storage'   => $v['storage'] ?? null,
                 'color'     => $v['color'] ?? null,
                 'price'     => (int) $v['price'],
-                'stock'     => (int) $v['stock'],
+                'stock'     => $stock,
                 'is_active' => (bool) ($v['is_active'] ?? true),
+                // pertahankan tanggal lama bila stok tidak berubah
+                'stock_updated_at' => ($prev && (int) $prev->stock === $stock)
+                    ? $prev->stock_updated_at
+                    : now(),
             ]);
         }
 

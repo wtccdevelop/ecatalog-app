@@ -87,7 +87,8 @@
                                     <p class="text-gray-700 dark:text-white font-semibold mb-1 text-xs">Harga:</p>
                                     <p class="font-extrabold text-blue-600 text-lg dark:text-blue-400">{{ formatRupiah(activeVariant.price) }}</p>
                                     <p class="mt-1 text-[11px] text-gray-500 dark:text-neutral-400">
-                                        Stok tersedia: {{ activeVariant.stock }} unit
+                                        Stok tersedia: {{ activeVariant.stock }} unit 
+                                        <span v-if="stockDate" class="italic">*update {{ stockDate }}</span>
                                     </p>
                                 </div>
 
@@ -256,6 +257,14 @@ function openInstallment() {
     showInstallment.value = true;
     track('installment_view');
 }
+
+const stockDate = computed(() => {
+    const d = activeVariant.value.stock_updated_at;
+    if (!d) return '';
+    return new Date(d).toLocaleDateString('id-ID', {
+        day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Jakarta',
+    });
+});
 
 const route = useRoute();
 

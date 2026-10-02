@@ -124,6 +124,7 @@ class ProductController extends Controller
                 'color'   => $v->color,
                 'price'   => (int) $v->price,
                 'stock'   => (int) $v->stock,
+                'stock_updated_at' => $v->stock_updated_at?->toIso8601String(),
             ])->values(),
             'specs'   => $p->specs->map(fn ($s) => ['label' => $s->label, 'value' => $s->value])->values(),
             'gallery' => $p->images->map(fn ($i) => Media::url($i->image_path))->values(),
