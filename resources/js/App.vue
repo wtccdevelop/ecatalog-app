@@ -5,6 +5,11 @@
             <RouterView />
             <AppFooter v-if="showChrome" />
         </div>
+
+        <template v-if="showChrome">
+            <EventAmbient :theme="eventTheme" />
+            <EventMascot :theme="eventTheme" />
+        </template>
     </div>
 </template>
 
@@ -13,11 +18,14 @@ import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import AppNavbar from './components/AppNavbar.vue';
 import AppFooter from './components/AppFooter.vue';
+import EventAmbient from './components/event/EventAmbient.vue';
+import EventMascot from './components/event/EventMascot.vue';
+import { useEventTheme } from './composables/useEventTheme.js';
 import { loadSite } from './stores/catalog.js';
 
 const route = useRoute();
+const eventTheme = useEventTheme();
 
-// navbar & footer disembunyikan di route dengan meta.hideChrome (login, admin)
 const showChrome = computed(() => !route.meta.hideChrome);
 
 const isDark = ref(false);
