@@ -127,12 +127,12 @@
                             :to="`/product/${p.slug}`"
                             class="group bg-white dark:bg-neutral-800 rounded-2xl ring-1 ring-black/5 dark:ring-white/5 shadow-sm overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
                         >
-                            <div class="bg-gray-50 dark:bg-neutral-700/60 p-3">
+                            <div class="">
                                 <img
                                     :src="p.image"
                                     :alt="p.name"
                                     loading="lazy"
-                                    class="w-full aspect-square object-contain group-hover:scale-105 transition-transform duration-500"
+                                    class="w-full object-contain group-hover:scale-105 transition-transform duration-500"
                                 />
                             </div>
                             <div class="p-3 lg:p-4">
