@@ -55,9 +55,11 @@ class ProductController extends Controller
             $data['image_path'] = Upload::store($request->file('image'), self::DIR);
         }
 
-        $product = DB::transaction(function () use ($data, $variants, $specs) {
+        $variantImages = $request->file('variant_images', []);
+
+        $product = DB::transaction(function () use ($data, $variants, $specs, $variantImages) {
             $p = Product::create($data);
-            $this->sync($p, $variants, $specs);
+            $this->sync($p, $variants, $specs, $variantImages);
 
             return $p;
         });
@@ -74,9 +76,11 @@ class ProductController extends Controller
             $data['image_path'] = Upload::store($request->file('image'), self::DIR);
         }
 
-        DB::transaction(function () use ($product, $data, $variants, $specs) {
+        $variantImages = $request->file('variant_images', []);
+
+        DB::transaction(function () use ($product, $data, $variants, $specs, $variantImages) {
             $product->update($data);
-            $this->sync($product, $variants, $specs);
+            $this->sync($product, $variants, $specs, $variantImages);
         });
 
         return response()->json($this->detail($product->refresh()));
@@ -107,17 +111,22 @@ class ProductController extends Controller
         $request->merge(['slug' => Str::slug((string) $request->input('name'))]);
 
         $request->validate([
-            'brand_id'    => ['required', 'exists:brands,id'],
-            'name'        => ['required', 'string', 'max:150'],
-            'slug'        => ['required', 'string', 'max:170', Rule::unique('products', 'slug')->ignore($product?->id)],
-            'description' => ['nullable', 'string', 'max:5000'],
-            'sort_order'  => ['nullable', 'integer', 'min:0', 'max:65535'],
-            'is_active'   => ['nullable', 'boolean'],
-            'image'       => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:3072'],
+            'brand_id'              => ['required', 'exists:brands,id'],
+            'name'                  => ['required', 'string', 'max:150'],
+            'slug'                  => ['required', 'string', 'max:170', Rule::unique('products', 'slug')->ignore($product?->id)],
+            'description'           => ['nullable', 'string', 'max:5000'],
+            'sort_order'            => ['nullable', 'integer', 'min:0', 'max:65535'],
+            'is_active'             => ['nullable', 'boolean'],
+            'image'                 => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:3072'],
+            'variant_images'        => ['nullable', 'array'],
+            'variant_images.*'      => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp', 'max:3072'],
         ], [
-            'slug.unique'       => 'Nama produk sudah dipakai.',
-            'brand_id.required' => 'Pilih brand terlebih dahulu.',
-            'brand_id.exists'   => 'Brand tidak valid.',
+            'slug.unique'              => 'Nama produk sudah dipakai.',
+            'brand_id.required'        => 'Pilih brand terlebih dahulu.',
+            'brand_id.exists'          => 'Brand tidak valid.',
+            'variant_images.*.image'   => 'Gambar varian harus berupa file gambar.',
+            'variant_images.*.mimes'   => 'Gambar varian harus PNG, JPG, atau WEBP.',
+            'variant_images.*.max'     => 'Gambar varian maks. 3 MB.',
         ]);
 
         // varian & spesifikasi dikirim sebagai JSON string di dalam FormData
@@ -162,27 +171,37 @@ class ProductController extends Controller
         return [$data, $variants, $specs];
     }
 
-    private function sync(Product $p, array $variants, array $specs): void
+    private function sync(Product $p, array $variants, array $specs, array $variantImages = []): void
     {
-        // peta stok lama: kunci ram|storage|color
+        // peta stok & gambar lama: kunci ram|storage|color
         $old = $p->variants()->get()->mapWithKeys(fn ($v) => [
             $v->ram.'|'.$v->storage.'|'.mb_strtolower((string) $v->color) => $v,
         ]);
 
         $p->variants()->delete();
 
-        foreach ($variants as $v) {
-            $key  = ($v['ram'] ?? null).'|'.($v['storage'] ?? null).'|'.mb_strtolower((string) ($v['color'] ?? ''));
-            $prev = $old->get($key);
+        foreach ($variants as $i => $v) {
+            $key   = ($v['ram'] ?? null).'|'.($v['storage'] ?? null).'|'.mb_strtolower((string) ($v['color'] ?? ''));
+            $prev  = $old->get($key);
             $stock = (int) $v['stock'];
 
+            // upload gambar baru bila ada, hapus lama bila diganti
+            $imagePath = $prev?->image_path;
+            if (isset($variantImages[$i]) && $variantImages[$i] instanceof \Illuminate\Http\UploadedFile) {
+                if ($imagePath) {
+                    Upload::delete($imagePath, self::DIR);
+                }
+                $imagePath = Upload::store($variantImages[$i], self::DIR);
+            }
+
             $p->variants()->create([
-                'ram'       => $v['ram'] ?? null,
-                'storage'   => $v['storage'] ?? null,
-                'color'     => $v['color'] ?? null,
-                'price'     => (int) $v['price'],
-                'stock'     => $stock,
-                'is_active' => (bool) ($v['is_active'] ?? true),
+                'ram'        => $v['ram'] ?? null,
+                'storage'    => $v['storage'] ?? null,
+                'color'      => $v['color'] ?? null,
+                'image_path' => $imagePath,
+                'price'      => (int) $v['price'],
+                'stock'      => $stock,
+                'is_active'  => (bool) ($v['is_active'] ?? true),
                 // pertahankan tanggal lama bila stok tidak berubah
                 'stock_updated_at' => ($prev && (int) $prev->stock === $stock)
                     ? $prev->stock_updated_at
@@ -223,6 +242,7 @@ class ProductController extends Controller
                 'ram'       => $v->ram,
                 'storage'   => $v->storage,
                 'color'     => $v->color,
+                'image'     => Media::url($v->image_path),
                 'price'     => (int) $v->price,
                 'stock'     => (int) $v->stock,
                 'is_active' => (bool) $v->is_active,

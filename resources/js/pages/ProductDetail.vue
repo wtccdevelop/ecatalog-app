@@ -31,8 +31,8 @@
                             <!-- Gambar -->
                             <div class="md:w-1/2 p-6 flex flex-col items-center">
                                 <img
-                                    class="h-auto w-full object-contain md:max-w-lg dark:bg-neutral-500 rounded-lg"
-                                    :src="detail.image"
+                                    class="h-auto w-full object-contain md:max-w-lg dark:bg-neutral-500 rounded-lg transition-opacity duration-200"
+                                    :src="activeImage"
                                     :alt="`${detail.name} ${variantLabel}`"
                                 />
                             </div>
@@ -299,6 +299,8 @@ const activeVariant = computed(() => {
 const variantLabel = computed(() =>
     [activeVariant.value.storage, activeVariant.value.color].filter(Boolean).join(' - ')
 );
+
+const activeImage = computed(() => activeVariant.value.image || detail.value?.image || '');
 
 const installments = computed(() => buildInstallments(activeVariant.value.price));
 const lowestInstallment = computed(() => installments.value.find((i) => i.tenure === 24));
