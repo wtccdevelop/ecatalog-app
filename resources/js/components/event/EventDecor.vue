@@ -4,13 +4,13 @@
         <!-- NATAL: topi santa + gantungan bola -->
         <template v-if="theme === 'christmas'">
             <svg class="ev-swing absolute right-1 top-0 w-12 sm:w-16" viewBox="0 0 60 44"></svg>
-            <svg class="absolute left-0.5 top-15 w-9 sm:w-12 lg:w-14 -rotate-6 drop-shadow-sm" viewBox="0 0 64 56">
+            <svg class="absolute left-0.5 top-1.5 w-9 sm:w-12 lg:w-14 -rotate-6 drop-shadow-sm" viewBox="0 0 64 56">
                 <path d="M8 38 C8 18 26 4 46 10 C42 18 44 28 56 38 Z" fill="#dc2626" />
                 <rect x="4" y="36" width="56" height="12" rx="6" fill="#fff" stroke="#e5e7eb" />
                 <circle cx="48" cy="10" r="6" fill="#fff" stroke="#e5e7eb" />
             </svg>
 
-            <svg class="absolute right-1 top-15 w-12 sm:w-16" viewBox="0 0 60 44">
+            <svg class="absolute right-1 top-1.5 w-12 sm:w-16" viewBox="0 0 60 44">
                 <g stroke="#9ca3af" stroke-width="1">
                     <path d="M10 0V12" /><path d="M30 0V20" /><path d="M50 0V14" />
                 </g>
@@ -29,7 +29,7 @@
         <!-- LEBARAN: ketupat + lentera -->
         <template v-else-if="theme === 'lebaran'">
             <svg class="ev-swing absolute left-1.5 top-0 w-7 sm:w-9 lg:w-11" viewBox="0 0 40 64"></svg>
-            <svg class="absolute left-1.5 top-15 w-7 sm:w-9 lg:w-11" viewBox="0 0 40 64">
+            <svg class="absolute left-1.5 top-1.5 w-7 sm:w-9 lg:w-11" viewBox="0 0 40 64">
                 <path d="M20 0V14" stroke="#9ca3af" stroke-width="1" />
                 <polygon points="20,14 36,32 20,50 4,32" fill="#16a34a" stroke="#14532d" stroke-width="1.2" />
                 <g stroke="#bbf7d0" stroke-width="1.2" fill="none">
@@ -38,7 +38,7 @@
                 <g stroke="#facc15" stroke-width="1.5"><path d="M17 50V60" /><path d="M20 50V62" /><path d="M23 50V60" /></g>
             </svg>
 
-            <svg class="absolute right-1.5 top-15 w-7 sm:w-9 lg:w-11" viewBox="0 0 40 72">
+            <svg class="absolute right-1.5 top-1.5 w-7 sm:w-9 lg:w-11" viewBox="0 0 40 72">
                 <path d="M20 0V12" stroke="#9ca3af" stroke-width="1" />
                 <path d="M13 12h14l-3 5H16z" fill="#b45309" />
                 <path d="M12 18h16l4 10v14l-4 10H12L8 42V28z" fill="#f59e0b" stroke="#b45309" stroke-width="1.2" />
