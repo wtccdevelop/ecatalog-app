@@ -121,7 +121,7 @@ const menu = [
     { label: 'Kategori Harga',    to: '/admin/price-categories', icon: I.money },
     { label: 'Sosial Media',      to: '/admin/socials',          icon: I.share },
     { label: 'Pengaturan',        to: '/admin/settings',         icon: I.cog },
-    { label: 'Tema Event',       to: '/admin/settings',        icon: I.list,  soon: true },
+    { label: 'Tema Event',       to: '/admin/event-themes',        icon: I.list },
     { label: 'Statistik',        to: '/admin/statistics',      icon: I.chart},
 ];
 

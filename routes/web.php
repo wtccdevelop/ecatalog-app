@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\Admin\PaymentMethodController as AdminPaymentMethod
 use App\Http\Controllers\Api\Admin\PriceCategoryController as AdminPriceCategoryController;
 use App\Http\Controllers\Api\Admin\SocialLinkController as AdminSocialLinkController;
 use App\Http\Controllers\Api\Admin\SettingController as AdminSettingController;
+use App\Http\Controllers\Api\Admin\EventThemeController as AdminEventThemeController;
 
 Route::prefix('api/auth')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
@@ -74,6 +75,12 @@ Route::prefix('api/admin')->middleware('auth')->group(function () {
     // Pengaturan
     Route::get('settings', [AdminSettingController::class, 'index']);
     Route::put('settings', [AdminSettingController::class, 'update']);
+
+        // Tema Event
+    Route::patch('event-themes/{eventTheme}/toggle', [AdminEventThemeController::class, 'toggle']);
+    Route::apiResource('event-themes', AdminEventThemeController::class)
+        ->parameters(['event-themes' => 'eventTheme'])
+        ->except('show');
 });
 
 Route::view('/{any?}', 'welcome')->where('any', '.*');

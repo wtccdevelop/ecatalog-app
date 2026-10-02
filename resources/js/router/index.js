@@ -18,6 +18,7 @@ import PriceCategoriesPage from '../pages/admin/PriceCategoriesPage.vue';
 import ProductsPage from '../pages/ProductsPage.vue';
 import SocialsPage from '../pages/admin/SocialsPage.vue';
 import SettingsPage from '../pages/admin/SettingsPage.vue';
+import EventThemesPage from '../pages/admin/EventThemesPage.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -44,6 +45,7 @@ const router = createRouter({
                 { path: 'price-categories', name: 'admin.price-categories', component: PriceCategoriesPage, meta: { title: 'Kategori Harga' } },
                 { path: 'socials', name: 'admin.socials', component: SocialsPage, meta: { title: 'Sosial Media' } },
                 { path: 'settings', name: 'admin.settings', component: SettingsPage, meta: { title: 'Pengaturan' } },
+                { path: 'event-themes', name: 'admin.event-themes', component: EventThemesPage, meta: { title: 'Tema Event' } },
             ],
         },
         { path: '/:pathMatch(.*)*', redirect: '/' },

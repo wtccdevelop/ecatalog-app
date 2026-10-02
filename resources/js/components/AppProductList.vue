@@ -30,8 +30,11 @@
                     v-for="product in visibleProducts(group)"
                     :key="product.id"
                     :to="`/product/${product.slug}`"
-                    class="bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-neutral-800 dark:border-neutral-900 cursor-pointer hover:shadow-md transition-shadow"
+                    class="relative bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-neutral-800 dark:border-neutral-900 cursor-pointer hover:shadow-md transition-shadow"
                 >
+
+                    <EventDecor :theme="eventTheme" />
+
                     <img
                         class="h-auto mx-auto dark:bg-neutral-500 rounded-t-xl"
                         :src="product.image"
@@ -85,6 +88,10 @@
 import { computed, reactive } from 'vue';
 import { catalog } from '../stores/catalog.js';
 import { formatRupiah, monthly24 } from '../lib/format.js';
+import EventDecor from './event/EventDecor.vue';
+import { useEventTheme } from '../composables/useEventTheme.js';
+
+const eventTheme = useEventTheme();
 
 const INITIAL_COUNT = 4;
 const LOAD_MORE_COUNT = 4;
