@@ -10,7 +10,7 @@ use App\Models\PaymentMethods;
 use App\Models\PriceCategories;
 use App\Models\Stores;
 use App\Support\Media;
-
+use App\Models\ShippingService;
 class HomeController extends Controller
 {
     public function __invoke()
@@ -79,6 +79,14 @@ class HomeController extends Controller
                 ->map(fn ($p) => [
                     'name' => $p->name,
                     'logo' => Media::url($p->logo_path),
+                ])->values(),
+            
+            'shipping' => ShippingService::where('is_active', true)
+                ->orderBy('sort_order')
+                ->get()
+                ->map(fn ($s) => [
+                    'name' => $s->name,
+                    'logo' => Media::url($s->logo_path),
                 ])->values(),
 
             'products_by_brand' => $brands
