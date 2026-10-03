@@ -249,6 +249,7 @@ class ProductController extends Controller
             ])->values(),
             'specs'   => $p->specs->map(fn ($s) => ['label' => $s->label, 'value' => $s->value])->values(),
             'gallery' => $p->images->map(fn ($i) => ['id' => $i->id, 'url' => Media::url($i->image_path)])->values(),
+            'variants_with_images' => $p->variants->filter(fn ($v) => $v->image_path)->map(fn ($v) => Media::url($v->image_path))->values(),
             'reviews' => $p->reviews->map(fn ($r) => [
                 'id'        => $r->id,
                 'name'      => $r->name,

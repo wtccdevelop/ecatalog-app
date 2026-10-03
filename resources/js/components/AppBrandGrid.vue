@@ -1,6 +1,6 @@
 <template>
     <div class="overflow-x-auto lg:overflow-x-visible dark:bg-neutral-700 bg-white whitespace-nowrap lg:whitespace-normal py-4 px-3 [&::-webkit-scrollbar]:hidden">
-        <div class="bg-blue-900 text-white text-xs p-4 rounded-lg w-full mb-4">
+        <div class="bg-blue-400 text-white text-xs p-4 rounded-lg w-full mb-4">
             <h2>Temukan Produk Kami Berdasarkan Brand Kesayanganmu.</h2>
         </div>
         <div class="lg:grid lg:grid-cols-8 md:gap-4 flex overflow-hidden md:justify-items-center">
