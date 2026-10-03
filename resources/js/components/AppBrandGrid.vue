@@ -2,7 +2,7 @@
     <section class="relative px-3 py-6 sm:px-4 overflow-hidden bg-white dark:bg-neutral-700">
         <!-- blob cahaya lembut -->
         <div class="pointer-events-none absolute -top-16 -left-10 size-56 rounded-full bg-sky-200/50 blur-3xl dark:bg-sky-500/10"></div>
-        <div class="pointer-events-none absolute -bottom-20 right-0 size-64 rounded-full bg-violet-200/50 blur-3xl dark:bg-violet-500/10"></div>
+        <div class="pointer-events-none absolute -bottom-20 right-0 size-64 rounded-full bg-sky-200/50 blur-3xl dark:bg-sky-500/10"></div>
 
         <div class="relative">
             <!-- Header -->
