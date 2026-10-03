@@ -146,9 +146,9 @@
                     <!-- Galeri -->
                     <div class="max-w-6xl mx-auto mt-6">
                         <h2 class="md:text-2xl text-base font-bold dark:text-white">Galeri Produk</h2>
-                        <div v-if="detail.gallery.length" class="flex flex-nowrap gap-2 overflow-x-auto pb-4 mt-3">
+                        <div v-if="galleryWithVariantImages.length" class="flex flex-nowrap gap-2 overflow-x-auto pb-4 mt-3">
                             <img
-                                v-for="(g, i) in detail.gallery"
+                                v-for="(g, i) in galleryWithVariantImages"
                                 :key="i"
                                 :src="g"
                                 :alt="`${detail.name} ${i + 1}`"
@@ -301,6 +301,18 @@ const variantLabel = computed(() =>
 );
 
 const activeImage = computed(() => activeVariant.value.image || detail.value?.image || '');
+
+const galleryWithVariantImages = computed(() => {
+    const detailGallery = detail.value?.gallery || [];
+    const variantImages = detail.value?.variants_with_images || [];
+    // gabungkan gallery utama + varian yang punya gambar, hilangkan duplikat
+    const seen = new Set();
+    return [...detailGallery, ...variantImages].filter(url => {
+        if (seen.has(url)) return false;
+        seen.add(url);
+        return true;
+    });
+});
 
 const installments = computed(() => buildInstallments(activeVariant.value.price));
 const lowestInstallment = computed(() => installments.value.find((i) => i.tenure === 24));
