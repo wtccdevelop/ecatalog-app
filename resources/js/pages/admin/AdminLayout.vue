@@ -5,7 +5,7 @@
 
         <!-- Sidebar -->
         <aside
-            class="fixed inset-y-0 left-0 z-50 w-64 bg-blue-900 text-white flex flex-col transition-transform duration-300"
+            class="fixed inset-y-0 left-0 z-50 w-64 bg-blue-400 text-white flex flex-col transition-transform duration-300"
             :class="open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
         >
             <div class="h-16 flex items-center px-5 border-b border-white/10">

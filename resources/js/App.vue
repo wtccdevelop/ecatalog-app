@@ -9,6 +9,7 @@
         <template v-if="showChrome">
             <EventAmbient :theme="eventTheme" />
             <EventMascot :theme="eventTheme" />
+            <WelcomeGreeting :raised="!!eventTheme" />   
         </template>
     </div>
 </template>
@@ -22,6 +23,7 @@ import EventAmbient from './components/event/EventAmbient.vue';
 import EventMascot from './components/event/EventMascot.vue';
 import { useEventTheme } from './composables/useEventTheme.js';
 import { loadSite } from './stores/catalog.js';
+import WelcomeGreeting from './components/WelcomeGreeting.vue';
 
 const route = useRoute();
 const eventTheme = useEventTheme();
