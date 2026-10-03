@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\Admin\PriceCategoryController as AdminPriceCategory
 use App\Http\Controllers\Api\Admin\SocialLinkController as AdminSocialLinkController;
 use App\Http\Controllers\Api\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Api\Admin\EventThemeController as AdminEventThemeController;
+use App\Http\Controllers\Api\Admin\ShippingServiceController as AdminShippingServiceController;
 
 Route::prefix('api/auth')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
@@ -76,10 +77,16 @@ Route::prefix('api/admin')->middleware('auth')->group(function () {
     Route::get('settings', [AdminSettingController::class, 'index']);
     Route::put('settings', [AdminSettingController::class, 'update']);
 
-        // Tema Event
+    // Tema Event
     Route::patch('event-themes/{eventTheme}/toggle', [AdminEventThemeController::class, 'toggle']);
     Route::apiResource('event-themes', AdminEventThemeController::class)
         ->parameters(['event-themes' => 'eventTheme'])
+        ->except('show');
+
+    // Jasa Kirim
+    Route::patch('shipping/{shipping}/toggle', [AdminShippingServiceController::class, 'toggle']);
+    Route::apiResource('shipping', AdminShippingServiceController::class)
+        ->parameters(['shipping' => 'shipping'])
         ->except('show');
 });
 
