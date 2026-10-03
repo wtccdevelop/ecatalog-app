@@ -40,7 +40,7 @@
                     <div
                         class="relative rounded-3xl bg-white/70 p-2.5 ring-1 ring-black/5 backdrop-blur-md shadow-sm transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-xl dark:bg-neutral-800/70 dark:ring-white/10"
                     >
-                        <div class="aspect-square overflow-hidden rounded-2xl bg-gray-50 ring-1 ring-black/5 dark:bg-neutral-900 dark:ring-white/5">
+                        <div class="aspect-square overflow-hidden rounded-2xl dark:bg-neutral-900 dark:ring-white/5">
                             <img
                                 :src="brand.logo"
                                 :alt="brand.name"
